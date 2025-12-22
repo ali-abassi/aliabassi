@@ -38,9 +38,9 @@ export function Navbar() {
         )}>
           <Link
             href="/"
-            className="text-xl font-black tracking-tightest hover:opacity-70 transition-opacity"
+            className="text-xl font-bold tracking-tight hover:opacity-70 transition-opacity"
           >
-            AA.
+            AliAbassi
           </Link>
 
           <nav className="hidden md:flex items-center gap-2">
@@ -51,7 +51,7 @@ export function Navbar() {
                   key={item.path}
                   href={item.path}
                   className={cn(
-                    "text-xs font-black uppercase tracking-widest px-5 py-2 rounded-full transition-all duration-300",
+                    "text-sm font-medium px-5 py-2 rounded-full transition-all duration-300",
                     active 
                       ? "bg-foreground text-background shadow-lg shadow-black/10" 
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -72,7 +72,7 @@ export function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="w-5 h-6" /> : <Menu className="w-5 h-6" />}
           </button>
         </div>
       </div>
@@ -95,9 +95,9 @@ export function Navbar() {
           <Link
             href="/"
             onClick={() => setOpen(false)}
-            className="text-2xl font-black tracking-tightest"
+            className="text-2xl font-bold tracking-tight"
           >
-            HOME.
+            Home
           </Link>
           {navItems.map((item) => (
             <Link
@@ -105,11 +105,11 @@ export function Navbar() {
               href={item.path}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-4xl font-black tracking-tightest uppercase",
-                pathname === item.path ? "text-foreground underline decoration-8 underline-offset-8" : "text-muted-foreground"
+                "text-4xl font-bold tracking-tight",
+                pathname === item.path ? "text-foreground underline decoration-4 underline-offset-8" : "text-muted-foreground"
               )}
             >
-              {item.name}.
+              {item.name}
             </Link>
           ))}
         </nav>

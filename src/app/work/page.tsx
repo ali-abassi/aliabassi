@@ -8,22 +8,22 @@ export const metadata: Metadata = {
 };
 
 const skillColors: Record<string, string> = {
-  "Prompt Engineering": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  "LLM Infrastructure": "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
-  "Conversational AI": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  "Python": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-  "Growth Marketing": "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  "E-commerce": "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400",
-  "Product Strategy": "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400",
-  "LLMs": "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400",
-  "Community Building": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  "Sales Leadership": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  "Supply Chain": "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
-  "Amazon Ads": "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  "Enterprise Sales": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  "Cognitive Computing": "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
-  "Programming": "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
-  "Shopify": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  "Prompt Engineering": "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+  "LLM Infrastructure": "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
+  "Conversational AI": "bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400",
+  "Python": "bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400",
+  "Growth Marketing": "bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400",
+  "E-commerce": "bg-pink-50 text-pink-600 dark:bg-pink-900/20 dark:text-pink-400",
+  "Product Strategy": "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400",
+  "LLMs": "bg-cyan-50 text-cyan-600 dark:bg-cyan-900/20 dark:text-cyan-400",
+  "Community Building": "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400",
+  "Sales Leadership": "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400",
+  "Supply Chain": "bg-slate-50 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
+  "Amazon Ads": "bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400",
+  "Enterprise Sales": "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+  "Cognitive Computing": "bg-violet-50 text-violet-600 dark:bg-violet-900/20 dark:text-violet-400",
+  "Programming": "bg-zinc-50 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300",
+  "Shopify": "bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400",
 };
 
 const roles = [
@@ -135,73 +135,73 @@ const roles = [
 
 export default function WorkPage() {
   return (
-    <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-20">
+    <main className="max-w-5xl mx-auto px-6 py-24 md:py-32 space-y-20">
       <div className="space-y-6 text-center md:text-left max-w-3xl">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tightest">Work</h1>
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight">Work</h1>
         <p className="text-xl md:text-2xl text-muted-foreground font-medium leading-relaxed">
           Building and scaling at the intersection of AI engineering, growth marketing, and technical implementation.
         </p>
       </div>
 
-      <div className="space-y-16">
+      <div className="space-y-24">
         {roles.map((role) => (
-          <article key={`${role.company}-${role.title}`} className="group border-t pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-20">
+          <article key={`${role.company}-${role.title}`} className="group relative">
+            <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-8 md:gap-16">
               <div className="space-y-6">
                 <a 
                   href={role.url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="block w-32 h-16 bg-muted/20 rounded-2xl flex items-center justify-center p-4 hover:bg-muted/40 transition-all border border-transparent hover:border-border no-underline group/logo"
+                  className="block w-32 h-16 bg-muted/30 rounded-xl flex items-center justify-center p-4 hover:bg-muted/50 transition-all border border-border/50 no-underline group/logo"
                 >
                   <img
                     src={role.logo}
                     alt={`${role.company} logo`}
-                    className="max-h-full max-w-full group-hover/logo:scale-105 transition-transform"
+                    className="max-h-full max-w-full group-hover/logo:scale-105 transition-transform grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100"
                   />
                 </a>
                 
                 <div className="space-y-1">
-                  <div className="text-sm font-black uppercase tracking-widest text-foreground">
+                  <div className="text-xs font-bold text-foreground">
                     {role.startDate} — {role.endDate}
                   </div>
                   {role.duration && (
-                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                    <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
                       {role.duration}
                     </div>
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                   {role.location}
                 </div>
               </div>
 
               <div className="space-y-8">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between gap-4">
-                    <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-none group-hover:text-primary transition-colors">
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                       {role.title}
                     </h2>
                     <a href={role.url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors shrink-0">
-                      <ExternalLink className="w-6 h-6" />
+                      <ExternalLink className="w-5 h-5" />
                     </a>
                   </div>
-                  <p className="text-xl font-bold text-muted-foreground/80 tracking-tight">
+                  <p className="text-xl font-semibold text-muted-foreground tracking-tight">
                     {role.company}
                   </p>
                 </div>
 
-                <div className="space-y-6 max-w-none">
-                  <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
+                <div className="space-y-6">
+                  <p className="text-lg md:text-xl text-foreground/90 font-normal leading-relaxed">
                     {role.description}
                   </p>
 
                   {role.achievements.length > 0 && (
                     <ul className="space-y-4">
                       {role.achievements.map((item) => (
-                        <li key={item} className="text-lg flex gap-4 text-muted-foreground leading-relaxed">
-                          <span className="text-foreground font-black mt-2 w-1.5 h-1.5 rounded-full bg-foreground shrink-0" />
+                        <li key={item} className="text-base md:text-lg flex gap-4 text-muted-foreground leading-relaxed">
+                          <span className="text-foreground/20 font-black mt-2.5 w-1.5 h-1.5 rounded-full bg-current shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -209,11 +209,11 @@ export default function WorkPage() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-3 pt-4">
+                <div className="flex flex-wrap gap-2 pt-4">
                   {role.skills?.map((skill) => (
                     <Badge 
                       key={skill} 
-                      className={`rounded-full font-bold uppercase tracking-widest text-[10px] px-4 py-1.5 border-none shadow-sm transition-transform hover:scale-105 ${skillColors[skill] || 'bg-muted text-muted-foreground'}`}
+                      className={`rounded-md font-medium text-sm px-3 py-0.5 border-none shadow-none transition-all hover:bg-opacity-80 ${skillColors[skill] || 'bg-muted text-muted-foreground'}`}
                     >
                       {skill}
                     </Badge>
