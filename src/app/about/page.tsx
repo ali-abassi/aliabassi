@@ -157,6 +157,17 @@ const tags = [
   { name: "Markets", color: "bg-yellow-50/50 text-yellow-600/80 dark:bg-yellow-900/10 dark:text-yellow-400/80" },
 ];
 
+const convoTopics = [
+  { name: "Stocks", color: "bg-emerald-50/60 text-emerald-700/80 dark:bg-emerald-500/10 dark:text-emerald-300/80" },
+  { name: "Technical analysis", color: "bg-blue-50/60 text-blue-700/80 dark:bg-blue-500/10 dark:text-blue-300/80" },
+  { name: "Startups", color: "bg-purple-50/60 text-purple-700/80 dark:bg-purple-500/10 dark:text-purple-300/80" },
+  { name: "Business strategy", color: "bg-orange-50/60 text-orange-700/80 dark:bg-orange-500/10 dark:text-orange-300/80" },
+  { name: "Product building", color: "bg-pink-50/60 text-pink-700/80 dark:bg-pink-500/10 dark:text-pink-300/80" },
+  { name: "AI agents", color: "bg-slate-50/60 text-slate-700/80 dark:bg-slate-500/10 dark:text-slate-300/80" },
+  { name: "Libertarian policy", color: "bg-yellow-50/60 text-yellow-700/80 dark:bg-yellow-500/10 dark:text-yellow-300/80" },
+  { name: "Trump", color: "bg-red-50/60 text-red-700/80 dark:bg-red-500/10 dark:text-red-300/80" },
+];
+
 export default function AboutPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-32">
@@ -213,7 +224,9 @@ export default function AboutPage() {
       <section className="space-y-12">
         <div className="space-y-4 max-w-3xl">
           <h2 className="text-4xl font-medium tracking-tight">Things I Like</h2>
-          <p className="text-xl text-muted-foreground font-normal">A visual collection of interests, inspirations, and daily drivers.</p>
+          <p className="text-xl text-muted-foreground font-normal">
+            A visual collection of interests and daily drivers — plus the topics I’ll happily go deep on if you bump into me.
+          </p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 border border-border/30 overflow-hidden rounded-[2.5rem]">
@@ -234,15 +247,36 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-2 pt-4">
-          {tags.map((tag) => (
-            <Badge 
-              key={tag.name} 
-              className={`rounded-md font-medium text-[12px] px-3 py-0.5 border-none shadow-none ${tag.color}`}
-            >
-              {tag.name}
-            </Badge>
-          ))}
+        <div className="space-y-6 pt-4">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+            {tags.map((tag) => (
+              <Badge
+                key={tag.name}
+                className={`rounded-md font-normal text-[12px] px-3 py-0.5 border-none shadow-none ${tag.color}`}
+              >
+                {tag.name}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.01] card-surface p-8 md:p-10 space-y-5">
+            <h3 className="text-2xl font-medium tracking-tight text-foreground/90 text-center lg:text-left">
+              Conversation topics
+            </h3>
+            <p className="text-lg md:text-xl text-muted-foreground font-normal leading-relaxed text-center lg:text-left max-w-3xl">
+              If you catch me at a coffee shop, on a chairlift, or after a meeting — these are the threads I naturally lean into.
+            </p>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
+              {convoTopics.map((t) => (
+                <Badge
+                  key={t.name}
+                  className={`rounded-md font-normal text-[12px] px-3 py-0.5 border-none shadow-none ${t.color}`}
+                >
+                  {t.name}
+                </Badge>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
