@@ -20,8 +20,8 @@ export default function ContentPage() {
     <main className="max-w-7xl mx-auto px-6 py-24 md:py-32 space-y-28">
       {/* Socials Section */}
       <div className="space-y-16">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-12">
-          <div className="space-y-4 max-w-2xl text-center md:text-left">
+        <div className="space-y-10 text-center">
+          <div className="space-y-4 max-w-3xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">Content</h1>
             <p className="text-xl md:text-2xl text-muted-foreground font-normal">
               Learnings, experiments, and updates across the technical landscape.
@@ -47,7 +47,7 @@ export default function ContentPage() {
 
       {/* Thoughts Section */}
       <section className="space-y-14 border-t border-border/40 pt-20">
-        <div className="space-y-4 text-center md:text-left max-w-3xl">
+        <div className="space-y-4 text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-medium tracking-tight">Thoughts</h2>
           <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
             Deep-dives into AI orchestration, design systems, and technical leadership.

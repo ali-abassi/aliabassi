@@ -57,8 +57,8 @@ export default async function ThoughtPage({ params }: Props) {
           <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Back to Content
         </Link>
 
-        <div className="space-y-10">
-          <div className="flex flex-wrap items-center gap-8 text-sm font-normal text-muted-foreground/70">
+        <div className="space-y-10 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm font-normal text-muted-foreground/70">
             <div className="flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-foreground/10" /> {thought.date}
             </div>
@@ -66,10 +66,10 @@ export default async function ThoughtPage({ params }: Props) {
               <Clock className="w-3.5 h-3.5 text-foreground/10" /> 5 min read
             </div>
           </div>
-          <h1 className="text-4xl md:text-7xl font-semibold tracking-tightest leading-[1.1] md:leading-[0.95] max-w-4xl">
+          <h1 className="text-4xl md:text-7xl font-semibold tracking-tightest leading-[1.1] md:leading-[0.95] max-w-4xl mx-auto">
             {thought.title}
           </h1>
-          <div className="max-w-2xl border-l border-border/50 pl-10 py-2">
+          <div className="max-w-3xl mx-auto border-t border-border/40 pt-8">
             <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed italic">
               {thought.excerpt}
             </p>

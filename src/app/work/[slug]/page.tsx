@@ -50,9 +50,9 @@ export default async function WorkDetailPage({ params }: Props) {
         </Link>
 
         <header className="space-y-10">
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+          <div className="flex flex-col items-center text-center gap-10">
             <div className="space-y-6 max-w-4xl">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center gap-4">
                 {item.logo ? (
                   <div className="w-14 h-14 rounded-2xl border border-border/40 bg-background flex items-center justify-center p-3 shadow-sm">
                     <img
@@ -81,7 +81,7 @@ export default async function WorkDetailPage({ params }: Props) {
               </p>
 
               {item.tags?.length ? (
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap justify-center gap-2 pt-2">
                   {item.tags.map((tag) => (
                     <Badge
                       key={tag.label}

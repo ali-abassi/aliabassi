@@ -48,7 +48,7 @@ const tools = [
 export default function ToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-20">
-      <div className="space-y-6 text-center md:text-left max-w-3xl">
+      <div className="space-y-6 text-center max-w-3xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">Tools</h1>
         <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
           Technical prototypes, mini-projects, and experiments in the AI/3D space.
@@ -77,7 +77,7 @@ export default function ToolsPage() {
             <CardContent className="p-10 pt-4 space-y-8 flex flex-col justify-between flex-1">
               <p className="text-lg text-muted-foreground/80 font-normal leading-relaxed">{tool.description}</p>
               <div className="flex items-center justify-between pt-6 border-t border-border/30">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40 font-mono">
+                <span className="text-[10px] font-medium tracking-widest text-muted-foreground/50 font-mono">
                   {tool.status}
                 </span>
                 <a href={tool.link} className="flex items-center gap-2 text-sm font-semibold hover:underline group/link">

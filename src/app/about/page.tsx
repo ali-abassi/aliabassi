@@ -162,10 +162,17 @@ export default function AboutPage() {
     <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-32">
       {/* Intro Section */}
       <div className="space-y-16">
-        <h1 className="text-6xl md:text-8xl font-semibold tracking-tightest leading-none">About</h1>
+        <div className="space-y-6 text-center max-w-3xl mx-auto">
+          <h1 className="text-6xl md:text-8xl font-semibold tracking-tightest leading-none">
+            About
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
+            A little context on how I work: design-driven implementation, practical AI systems, and a builder mindset.
+          </p>
+        </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-16 lg:gap-24 items-center">
-          <div className="prose prose-zinc dark:prose-invert max-w-none space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-normal">
+          <div className="prose prose-zinc dark:prose-invert max-w-none space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-normal text-center lg:text-left">
             <p>
               I'm <span className="text-foreground font-medium">Ali Abassi</span>, a design-driven <span className="text-foreground">AI Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
             </p>
@@ -179,7 +186,9 @@ export default function AboutPage() {
 
           {/* Personality Graph */}
           <div className="space-y-8 p-8 border border-border/50 rounded-[2rem] bg-muted/5">
-            <h3 className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground/60 text-center font-mono">Professional Matrix</h3>
+            <h3 className="text-[10px] font-medium tracking-[0.2em] text-muted-foreground/60 text-center font-mono">
+              Professional Matrix
+            </h3>
             <div className="aspect-square w-full">
               <ChartContainer config={chartConfig} className="h-full w-full">
                 <RadarChart data={personalityData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
