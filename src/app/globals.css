@@ -47,7 +47,7 @@
 }
 
 :root {
-  --radius: 0rem;
+  --radius: 0.5rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
@@ -56,29 +56,21 @@
   --popover-foreground: oklch(0 0 0);
   --primary: oklch(0 0 0);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0 0);
+  --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0 0 0);
-  --muted: oklch(0.96 0 0);
+  --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.96 0 0);
+  --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0 0 0);
-  --destructive: oklch(0 0 0);
-  --border: oklch(0.85 0 0);
-  --input: oklch(0.85 0 0);
+  --destructive: oklch(0.3 0 0);
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.92 0 0);
   --ring: oklch(0 0 0);
   --chart-1: oklch(0 0 0);
   --chart-2: oklch(0.2 0 0);
   --chart-3: oklch(0.4 0 0);
   --chart-4: oklch(0.6 0 0);
   --chart-5: oklch(0.8 0 0);
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0 0 0);
-  --sidebar-primary: oklch(0 0 0);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0 0 0);
-  --sidebar-border: oklch(0.85 0 0);
-  --sidebar-ring: oklch(0 0 0);
 }
 
 .dark {
@@ -96,23 +88,10 @@
   --muted-foreground: oklch(0.6 0 0);
   --accent: oklch(0.1 0 0);
   --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(1 0 0);
+  --destructive: oklch(0.6 0 0);
   --border: oklch(0.2 0 0);
   --input: oklch(0.2 0 0);
-  --ring: oklch(1 0 0);
-  --chart-1: oklch(1 0 0);
-  --chart-2: oklch(0.8 0 0);
-  --chart-3: oklch(0.6 0 0);
-  --chart-4: oklch(0.4 0 0);
-  --chart-5: oklch(0.2 0 0);
-  --sidebar: oklch(0 0 0);
-  --sidebar-foreground: oklch(1 0 0);
-  --sidebar-primary: oklch(1 0 0);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.1 0 0);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.2 0 0);
-  --sidebar-ring: oklch(1 0 0);
+  --ring: oklch(0.8 0 0);
 }
 
 @layer base {
@@ -123,33 +102,22 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased tracking-tight;
   }
 
-  /* Typography system: semantic tags get consistent styling by default */
   h1 {
-    @apply text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase leading-[0.95];
+    @apply text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter leading-none;
   }
   h2 {
-    @apply text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight;
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-tight;
   }
   h3 {
-    @apply text-xl sm:text-2xl font-bold tracking-tight uppercase;
+    @apply text-lg sm:text-xl font-semibold tracking-tight;
   }
   p {
-    @apply text-base sm:text-lg leading-relaxed;
-  }
-  small {
-    @apply text-sm text-muted-foreground;
+    @apply text-base sm:text-lg leading-relaxed text-muted-foreground;
   }
   a {
-    @apply underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors;
-  }
-  code {
-    @apply font-mono text-sm;
-  }
-  ::selection {
-    background: #000;
-    color: #fff;
+    @apply text-foreground underline underline-offset-4 decoration-muted hover:decoration-foreground transition-colors;
   }
 }

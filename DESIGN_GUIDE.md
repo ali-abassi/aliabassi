@@ -11,13 +11,13 @@ Super simple, high-contrast, black and white aesthetic. Focus on typography, whi
 - **Accent**: No colors. Use bold weights or inverted blocks for emphasis.
 
 ## Typography
-- **Headings**: Geist Sans (Sans-serif), Bold/Extrabold, tight tracking.
+- **Headings**: Geist Sans (Sans-serif), Bold/Extrabold, tight tracking. Mixed case (not all caps).
 - **Body**: Geist Sans, Regular, leading-relaxed.
 - **Monospace**: Geist Mono for technical details, tools, and code.
 
 ### Enforced in code
 We enforce defaults for semantic HTML tags via `@layer base` in `src/app/globals.css`:
-- `h1/h2/h3` get consistent sizing/weight/uppercase/letter-spacing
+- `h1/h2/h3` get consistent sizing/weight/tracking
 - `p` gets consistent type size and line-height
 - `a` gets consistent underline style
 

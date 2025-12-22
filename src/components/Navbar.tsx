@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,19 +16,31 @@ const navItems = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-foreground bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-16 flex items-center justify-between">
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "bg-background/80 backdrop-blur-md border-b py-3" : "bg-transparent py-6"
+      )}
+    >
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="no-underline font-black uppercase tracking-tight hover:opacity-70 transition-opacity"
+            className="text-xl font-bold tracking-tighter hover:opacity-70 transition-opacity"
           >
             Ali Abassi
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-xs font-black uppercase tracking-widest">
+          <nav className="hidden md:flex items-center gap-10">
             {navItems.map((item) => {
               const active = pathname === item.path;
               return (
@@ -36,8 +48,8 @@ export function Navbar() {
                   key={item.path}
                   href={item.path}
                   className={cn(
-                    "no-underline hover:opacity-70 transition-opacity",
-                    active && "underline underline-offset-8 decoration-2",
+                    "text-sm font-medium transition-all hover:text-foreground",
+                    active ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {item.name}
@@ -48,38 +60,38 @@ export function Navbar() {
 
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 border-2 border-foreground bg-background"
+            className="md:hidden p-2 hover:bg-muted rounded-md transition-colors"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="md:hidden border-t border-foreground">
-          <div className="px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-4">
-            {navItems.map((item) => {
-              const active = pathname === item.path;
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "no-underline text-sm font-black uppercase tracking-widest",
-                    active ? "underline underline-offset-8 decoration-2" : "opacity-70",
-                  )}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {/* Mobile Nav */}
+      <div 
+        className={cn(
+          "absolute top-full left-0 right-0 bg-background border-b overflow-hidden transition-all duration-300 md:hidden",
+          open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <nav className="flex flex-col p-6 gap-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              onClick={() => setOpen(false)}
+              className={cn(
+                "text-lg font-semibold",
+                pathname === item.path ? "text-foreground" : "text-muted-foreground"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }
-
