@@ -36,12 +36,13 @@ export default async function WorkDetailPage({ params }: Props) {
   const { slug } = await params;
   const item = getWorkItem(slug);
   if (!item) notFound();
+  const backHref = item.kind === "builder" ? "/work?view=builder" : "/work?view=employee";
 
   return (
     <main className="min-h-screen bg-background pb-32">
       <div className="max-w-6xl mx-auto px-6 pt-32 space-y-16">
         <Link
-          href="/work"
+          href={backHref}
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors no-underline group"
         >
           <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
@@ -107,6 +108,23 @@ export default async function WorkDetailPage({ params }: Props) {
           </div>
         </header>
 
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="rounded-[2rem] border border-border/40 bg-muted/[0.02] p-6 space-y-2">
+            <div className="text-sm text-muted-foreground/70 font-normal">Time</div>
+            <div className="text-lg font-medium text-foreground/85">{item.timeframe}</div>
+          </div>
+          <div className="rounded-[2rem] border border-border/40 bg-muted/[0.02] p-6 space-y-2">
+            <div className="text-sm text-muted-foreground/70 font-normal">Location</div>
+            <div className="text-lg font-medium text-foreground/85">{item.location ?? "—"}</div>
+          </div>
+          <div className="rounded-[2rem] border border-border/40 bg-muted/[0.02] p-6 space-y-2">
+            <div className="text-sm text-muted-foreground/70 font-normal">Focus</div>
+            <div className="text-lg font-medium text-foreground/85">
+              {item.kind === "employee" ? "Employee role" : "Built and shipped"}
+            </div>
+          </div>
+        </section>
+
         <section className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 border-t border-border/40 pt-16">
           <div className="space-y-14">
             <div className="space-y-4">
@@ -147,7 +165,7 @@ export default async function WorkDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <aside className="space-y-8">
+          <aside className="space-y-8 lg:sticky lg:top-28 h-fit">
             <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.02] p-8 space-y-6">
               <h3 className="text-lg font-medium text-foreground/80">
                 Toolkit

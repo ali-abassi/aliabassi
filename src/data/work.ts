@@ -218,56 +218,6 @@ export const workItems: WorkItem[] = [
     ],
     tools: ["Next.js", "SEO", "Content systems", "Analytics", "Product strategy"],
   },
-  {
-    kind: "builder",
-    slug: "tools-and-lab",
-    name: "Tools & Lab",
-    url: "/tools",
-    role: "Builder",
-    timeframe: "Ongoing",
-    oneLiner:
-      "A space to ship small experiments—3D interactions, UI patterns, and practical mini-tools.",
-    highlights: [
-      "Prototype new interaction patterns quickly",
-      "Keep builds clean and design-driven",
-      "Focus on small, shippable artifacts",
-    ],
-    tags: [t("Product"), t("AI")],
-    overview:
-      "Tools & Lab is where I iterate on ideas fast—small experiments that improve my craft and become reusable patterns.",
-    whatIDid: [
-      "Built a set of prototypes emphasizing clarity and minimalism.",
-      "Explored interaction patterns with 3D and subtle motion.",
-      "Maintained a consistent design system across experiments.",
-    ],
-    outcomes: ["A growing library of patterns and prototypes that ship quickly."],
-    tools: ["Next.js", "Tailwind", "Three.js", "Framer Motion"],
-  },
-  {
-    kind: "builder",
-    slug: "aliabassi-com",
-    name: "AliAbassi.com",
-    url: "/",
-    role: "Builder",
-    timeframe: "Ongoing",
-    oneLiner:
-      "This site: a minimal, design-forward personal platform with an editorial Thoughts system and SEO foundations.",
-    highlights: [
-      "Built an editorial Thoughts system with FAQs + sources",
-      "Designed a consistent minimalist UI system",
-      "Implemented sitemap + robots + JSON-LD",
-    ],
-    tags: [t("Product"), t("Growth")],
-    overview:
-      "A low-maintenance, design-driven personal site built to scale content, showcase work, and rank for AI Forward Deployed Engineer.",
-    whatIDid: [
-      "Defined a minimalist design system and applied it across pages.",
-      "Built a scalable content model (Thoughts) with SEO structure.",
-      "Implemented technical SEO primitives for crawlability.",
-    ],
-    outcomes: ["A fast, clean platform that supports ongoing writing and portfolio growth."],
-    tools: ["Next.js", "Tailwind v4", "shadcn/ui", "SEO"],
-  },
 ];
 
 export const employeeItems = workItems.filter((w) => w.kind === "employee");
