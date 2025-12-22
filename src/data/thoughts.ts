@@ -15,6 +15,7 @@ export interface Thought {
   content: string;
   date: string;
   image: string;
+  category: "Business" | "Tech" | "Learnings" | "Off topic" | "AI";
   tags: string[];
   faqs: FAQ[];
   sources: Source[];
@@ -27,6 +28,7 @@ export const thoughts: Thought[] = [
     excerpt: "Moving beyond simple chat interfaces to fully autonomous, multi-agent systems that solve complex business workflows.",
     date: "Dec 22, 2025",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    category: "AI",
     tags: ["Agents", "Orchestration", "Reliability", "Enterprise"],
     content: `
       <p>As we move into 2026, the paradigm of AI interaction is shifting rapidly. We are moving away from the "chat box" model where a human manually prompts a single model, and toward <strong>autonomous orchestration</strong>.</p>
@@ -80,6 +82,7 @@ export const thoughts: Thought[] = [
     excerpt: "Why the best technical solutions start with a deep understanding of user experience and human psychology.",
     date: "Dec 15, 2025",
     image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
+    category: "Tech",
     tags: ["Design", "UX", "Implementation", "Adoption"],
     content: `
       <p>Technical engineering is often seen as a purely logical pursuit. But in the world of <strong>AI Forward Deployed Engineering</strong>, design is a core technical requirement.</p>
@@ -126,6 +129,7 @@ export const thoughts: Thought[] = [
     excerpt: "Technical deep-dive into the challenges of deploying large language models across global organizations with millions of users.",
     date: "Dec 08, 2025",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+    category: "Tech",
     tags: ["Infrastructure", "Scaling", "Latency", "Enterprise"],
     content: `
       <p>Deploying a prototype is easy. Deploying a system that handles <strong>100,000 requests per minute</strong> with consistent sub-second latency is where the real engineering happens.</p>
@@ -172,6 +176,7 @@ export const thoughts: Thought[] = [
     excerpt: "How to design UI that guides AI agents toward accuracy and builds user trust through radical transparency.",
     date: "Dec 01, 2025",
     image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=800",
+    category: "AI",
     tags: ["Trust", "UX", "Guardrails", "Verification"],
     content: `
       <p>Trust is the hardest currency to earn in the AI era. One hallucination can destroy months of user confidence. The solution isn't just better models—it's <strong>better interfaces</strong>.</p>
@@ -211,6 +216,7 @@ export const thoughts: Thought[] = [
     excerpt: "My journey through growth marketing, business strategy, and how it shaped my approach to building AI products.",
     date: "Nov 24, 2025",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    category: "Off topic",
     tags: ["Growth", "Strategy", "Forward Deployed", "Career"],
     content: `
       <p>My career didn't start in a IDE. It started in the world of <strong>growth marketing</strong> and <strong>business development</strong>. This unconventional path has become my greatest strength as an engineer.</p>

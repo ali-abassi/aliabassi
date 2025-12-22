@@ -13,48 +13,44 @@ function normalize(s: string) {
 }
 
 export function ThoughtsFeed({ thoughts }: { thoughts: Thought[] }) {
-  const [activeTag, setActiveTag] = useState<string>("All");
+  const categories = ["All", "Business", "Tech", "Learnings", "Off topic", "AI"] as const;
+  type Category = (typeof categories)[number];
+
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [q, setQ] = useState("");
 
-  const allTags = useMemo(() => {
-    const set = new Set<string>();
-    for (const t of thoughts) for (const tag of t.tags ?? []) set.add(tag);
-    return ["All", ...Array.from(set).sort((a, b) => a.localeCompare(b))];
-  }, [thoughts]);
-
   const counts = useMemo(() => {
-    const map = new Map<string, number>();
+    const map = new Map<Category, number>();
+    for (const c of categories) map.set(c, 0);
     map.set("All", thoughts.length);
     for (const t of thoughts) {
-      for (const tag of t.tags ?? []) {
-        map.set(tag, (map.get(tag) ?? 0) + 1);
-      }
+      map.set(t.category, (map.get(t.category) ?? 0) + 1);
     }
-    return map;
+    return map as Map<Category, number>;
   }, [thoughts]);
 
   const filtered = useMemo(() => {
     const query = normalize(q);
     return thoughts.filter((t) => {
-      const matchesTag = activeTag === "All" ? true : (t.tags ?? []).includes(activeTag);
-      if (!matchesTag) return false;
+      const matchesCategory = activeCategory === "All" ? true : t.category === activeCategory;
+      if (!matchesCategory) return false;
       if (!query) return true;
-      const hay = normalize(`${t.title} ${t.excerpt} ${(t.tags ?? []).join(" ")}`);
+      const hay = normalize(`${t.title} ${t.excerpt} ${t.category} ${(t.tags ?? []).join(" ")}`);
       return hay.includes(query);
     });
-  }, [thoughts, activeTag, q]);
+  }, [thoughts, activeCategory, q]);
 
   return (
     <section className="space-y-8">
       <div className="rounded-[2.75rem] border border-border/40 bg-muted/[0.01] card-surface p-6 md:p-10 space-y-8">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-            {allTags.map((tag) => {
-              const active = tag === activeTag;
-              const count = counts.get(tag) ?? 0;
+            {categories.map((cat) => {
+              const active = cat === activeCategory;
+              const count = counts.get(cat) ?? 0;
               return (
                 <Button
-                  key={tag}
+                  key={cat}
                   type="button"
                   variant={active ? "default" : "outline"}
                   size="sm"
@@ -64,9 +60,9 @@ export function ThoughtsFeed({ thoughts }: { thoughts: Thought[] }) {
                       ? "shadow-lg shadow-black/10"
                       : "border-border/40 text-muted-foreground hover:text-foreground hover:bg-muted/[0.06]",
                   ].join(" ")}
-                  onClick={() => setActiveTag(tag)}
+                  onClick={() => setActiveCategory(cat)}
                 >
-                  {tag}
+                  {cat}
                   <span className="text-xs opacity-60 tabular-nums">{count}</span>
                 </Button>
               );
@@ -126,7 +122,10 @@ export function ThoughtsFeed({ thoughts }: { thoughts: Thought[] }) {
                     {thought.date}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {thought.tags.slice(0, 3).map((tag) => (
+                    <Badge className="rounded-md text-[11px] px-2.5 py-0.5 border-none shadow-none font-normal bg-foreground/5 text-foreground/70">
+                      {thought.category}
+                    </Badge>
+                    {thought.tags.slice(0, 2).map((tag) => (
                       <Badge
                         key={tag}
                         className="rounded-md text-[11px] px-2.5 py-0.5 border border-border/30 bg-background text-muted-foreground/80 shadow-none font-normal"
