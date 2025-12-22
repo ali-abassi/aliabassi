@@ -59,7 +59,7 @@ function WorkCard({
   tags,
 }: (typeof employeeItems)[number]) {
   return (
-    <div className="group rounded-[2.75rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500">
+    <div className="group rounded-[2.75rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 card-surface">
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10 p-6 md:p-12">
         <div className="space-y-6">
           <div className="flex items-start justify-between gap-4">

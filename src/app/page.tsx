@@ -147,7 +147,7 @@ export default function Home() {
             <div className="text-center text-sm text-muted-foreground/70 font-normal">
               Shipped with teams at
             </div>
-            <div className="mt-6 border border-border/30 rounded-[2rem] bg-muted/[0.02] overflow-hidden">
+            <div className="mt-6 border border-border/30 rounded-[2rem] bg-muted/[0.02] overflow-hidden card-surface">
               <div className="mask-fade-x">
                 <div className="flex w-[200%] animate-marquee">
                   <div className="flex w-1/2 items-center justify-around px-10 py-8">
@@ -195,7 +195,7 @@ export default function Home() {
             <div className="lg:col-span-7 space-y-6">
               <Link
                 href="/work"
-                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 overflow-hidden"
+                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 overflow-hidden card-surface"
               >
                 <div className="p-10 md:p-12 space-y-8">
                   <div className="flex items-start justify-between gap-8">
@@ -224,7 +224,7 @@ export default function Home() {
                     {featuredWork.map((w) => (
                       <div
                         key={w.slug}
-                        className="rounded-[2rem] border border-border/30 bg-background p-6 space-y-3"
+                        className="rounded-[2rem] border border-border/30 bg-background p-6 space-y-3 card-surface"
                       >
                         <div className="text-sm text-muted-foreground/70">
                           {w.timeframe}
@@ -245,7 +245,7 @@ export default function Home() {
             <div className="lg:col-span-5 space-y-6">
               <Link
                 href="/content"
-                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500"
+                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 card-surface"
               >
                 <div className="p-10 md:p-12 space-y-8">
                   <div className="flex items-start justify-between gap-8">
@@ -265,7 +265,7 @@ export default function Home() {
                     {latestThoughts.map((t) => (
                       <div
                         key={t.slug}
-                        className="rounded-[2rem] border border-border/30 bg-background p-6 space-y-2"
+                        className="rounded-[2rem] border border-border/30 bg-background p-6 space-y-2 card-surface"
                       >
                         <div className="text-sm text-muted-foreground/70">
                           {t.date}
@@ -281,7 +281,7 @@ export default function Home() {
 
               <Link
                 href="/tools"
-                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500"
+                className="group no-underline block rounded-[3rem] border border-border/30 bg-muted/[0.02] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 card-surface"
               >
                 <div className="p-10 md:p-12 space-y-6">
                   <div className="flex items-start justify-between gap-8">
@@ -301,7 +301,7 @@ export default function Home() {
                     {featuredTools.map((tool) => (
                       <div
                         key={tool.slug}
-                        className="flex items-center justify-between rounded-[2rem] border border-border/30 bg-background px-6 py-4"
+                        className="flex items-center justify-between rounded-[2rem] border border-border/30 bg-background px-6 py-4 card-surface"
                       >
                         <div className="space-y-1">
                           <div className="text-base font-medium text-foreground/85">

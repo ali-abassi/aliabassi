@@ -69,7 +69,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
             href={`/tools/${tool.slug}`}
             className="group block no-underline"
           >
-            <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 p-8 md:p-10 space-y-8 h-full">
+            <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 p-8 md:p-10 space-y-8 h-full card-surface">
               <div className="flex items-start justify-between gap-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl border border-border/40 bg-background flex items-center justify-center text-sm font-medium text-foreground/70 shadow-sm">

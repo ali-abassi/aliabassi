@@ -53,7 +53,7 @@ export default function ContentPage() {
           <Link
             key={thought.slug}
             href={`/thoughts/${thought.slug}`}
-            className="group no-underline block rounded-[2.75rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500"
+            className="group no-underline block rounded-[2.75rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 card-surface"
           >
             <div className="grid grid-cols-1 md:grid-cols-[380px_1fr] gap-8 md:gap-14 p-6 md:p-12 items-center">
               <div className="relative">
