@@ -9,13 +9,13 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "About Me",
-  description: "Learn more about Ali Abassi, AI / Forward Deployed Engineer. Explore FAQs, media mentions, and career background.",
+  description: "Learn more about Ali Abassi, AI Forward Deployed Engineer. Explore FAQs, media mentions, and career background.",
 };
 
 const faqs = [
   {
     question: "Who is Ali Abassi?",
-    answer: "Ali Abassi is an AI / Forward Deployed Engineer at Lindy AI, specializing in building production-grade AI agents and human-centric interfaces. He has a track record of founding and scaling AI-driven platforms like AI for Work.",
+    answer: "Ali Abassi is an AI Forward Deployed Engineer at Lindy AI, specializing in building production-grade AI agents and human-centric interfaces. He has a track record of founding and scaling AI-driven platforms like AI for Work.",
   },
   {
     question: "What is Ali Abassi's expertise?",
@@ -48,13 +48,13 @@ export default function AboutPage() {
         
         <div className="prose prose-zinc dark:prose-invert max-w-4xl space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-medium">
           <p>
-            I'm <span className="text-foreground font-bold">Ali Abassi</span>, a design-driven <span className="text-foreground">AI / Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
+            I'm <span className="text-foreground font-bold">Ali Abassi</span>, a design-driven <span className="text-foreground">AI Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
           </p>
           <p>
             With a background spanning <span className="text-foreground">growth marketing</span> and <span className="text-foreground">technical implementation</span>, I believe that the best products are built with a deep understanding of both human psychology and technical architecture.
           </p>
           <p>
-            Currently, I'm an <span className="text-foreground">AI / Forward Deployed Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
+            Currently, I'm an <span className="text-foreground">AI Forward Deployed Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
           </p>
         </div>
       </div>
@@ -64,12 +64,12 @@ export default function AboutPage() {
           <h2 className="text-4xl font-bold tracking-tight">In the Media</h2>
           <div className="space-y-6">
             <div className="p-8 border border-border/50 rounded-[2rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
-              <div className="absolute top-6 right-8 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">Article</div>
+              <div className="absolute top-6 right-8 text-[10px] font-bold text-muted-foreground/50">Article</div>
               <h3 className="text-2xl font-bold mt-1">Acquisition of AI for Work</h3>
               <p className="text-lg mt-4 text-muted-foreground font-normal leading-relaxed">Detailing the growth and eventual exit of the world's largest prompt library.</p>
             </div>
             <div className="p-8 border border-border/50 rounded-[2rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
-              <div className="absolute top-6 right-8 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/50">Podcast</div>
+              <div className="absolute top-6 right-8 text-[10px] font-bold text-muted-foreground/50">Podcast</div>
               <h3 className="text-2xl font-bold mt-1">The Future of AI Agents</h3>
               <p className="text-lg mt-4 text-muted-foreground font-normal leading-relaxed">Discussing the shift from chat-interfaces to fully autonomous agents.</p>
             </div>
@@ -78,11 +78,11 @@ export default function AboutPage() {
 
         <section className="space-y-10">
           <h2 className="text-4xl font-bold tracking-tight">Interests</h2>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {interests.map((interest) => (
               <Badge 
                 key={interest.name} 
-                className={`rounded-md font-medium text-sm px-3.5 py-1 border-none shadow-none transition-transform hover:scale-[1.02] ${interest.color}`}
+                className={`rounded-full font-black tracking-tight text-[10px] px-5 py-2 border-none shadow-sm transition-transform hover:scale-105 ${interest.color}`}
               >
                 {interest.name}
               </Badge>

@@ -18,7 +18,7 @@ export default function Home() {
                 Ali Abassi
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
-                AI / Forward Deployed Engineer. Building production-grade AI interfaces and scalable LLM infrastructure.
+                AI Forward Deployed Engineer. Building production-grade AI interfaces and scalable LLM infrastructure.
               </p>
             </div>
             
