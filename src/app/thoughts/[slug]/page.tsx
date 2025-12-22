@@ -83,7 +83,7 @@ export default async function ThoughtPage({ params }: Props) {
           <img 
             src={thought.image} 
             alt={thought.title}
-            className="w-full h-full object-cover grayscale opacity-70"
+            className="w-full h-full object-cover"
           />
         </div>
       </div>
