@@ -5,7 +5,7 @@ import { tools } from "@/data/tools";
 export const metadata: Metadata = {
   title: "Tools",
   description:
-    "A curated set of tools by Ali Abassi — voice agents, brand builds, and BYOK demos.",
+    "A curated set of tools by Ali Abassi — tools and brands built with a design-forward, minimal approach.",
 };
 
 export default function ToolsPage() {

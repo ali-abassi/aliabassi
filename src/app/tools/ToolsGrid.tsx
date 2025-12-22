@@ -8,16 +8,14 @@ import { Button } from "@/components/ui/button";
 import type { Tool, ToolCostKey } from "@/data/tools";
 
 const costStyles: Record<ToolCostKey, string> = {
-  free: "bg-emerald-50/60 text-emerald-700/80 dark:bg-emerald-500/10 dark:text-emerald-300/80",
+  tool: "bg-emerald-50/60 text-emerald-700/80 dark:bg-emerald-500/10 dark:text-emerald-300/80",
   brand: "bg-slate-50/60 text-slate-700/80 dark:bg-slate-500/10 dark:text-slate-300/80",
-  byok: "bg-blue-50/60 text-blue-700/80 dark:bg-blue-500/10 dark:text-blue-300/80",
 };
 
 const filterLabels: Record<"all" | ToolCostKey, string> = {
   all: "All",
-  free: "Free",
+  tool: "Tools",
   brand: "Brands",
-  byok: "BYOK",
 };
 
 export function ToolsGrid({ tools }: { tools: Tool[] }) {
@@ -26,9 +24,8 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
   const counts = useMemo(() => {
     const c: Record<"all" | ToolCostKey, number> = {
       all: tools.length,
-      free: 0,
+      tool: 0,
       brand: 0,
-      byok: 0,
     };
     for (const t of tools) c[t.costKey] += 1;
     return c;

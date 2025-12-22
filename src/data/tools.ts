@@ -1,4 +1,4 @@
-export type ToolCostKey = "free" | "brand" | "byok";
+export type ToolCostKey = "tool" | "brand";
 
 export type Tool = {
   slug: string;
@@ -18,8 +18,8 @@ export const tools: Tool[] = [
     description:
       "Generate and iterate on voice-agent prompts with clean structure, safety rails, and conversational tone controls.",
     category: "Voice agents",
-    costKey: "free",
-    costLabel: "Free",
+    costKey: "tool",
+    costLabel: "Tool",
     logoText: "VA",
   },
   {
@@ -36,10 +36,10 @@ export const tools: Tool[] = [
     slug: "voice-agent-demo",
     title: "Voice Agent Demo",
     description:
-      "Try a live voice-agent demo using your own API key (BYOK). Built to be safe, fast, and easy to evaluate.",
+      "Try a live voice-agent demo using your own API key. Built to be safe, fast, and easy to evaluate.",
     category: "Voice agents",
-    costKey: "byok",
-    costLabel: "BYOK (API key)",
+    costKey: "tool",
+    costLabel: "Tool",
     logoText: "VD",
   },
 ];
