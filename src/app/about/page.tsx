@@ -220,66 +220,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Full Visual Canvas */}
-      <section className="space-y-12">
-        <div className="space-y-4 max-w-3xl">
-          <h2 className="text-4xl font-medium tracking-tight">Things I Like</h2>
-          <p className="text-xl text-muted-foreground font-normal">
-            A visual collection of interests and daily drivers — plus the topics I’ll happily go deep on if you bump into me.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 border border-border/30 overflow-hidden rounded-[2.5rem]">
-          {likes.map((item) => (
-            <div 
-              key={item.title} 
-              className={`relative overflow-hidden group bg-background ${item.className}`}
-            >
-              <img 
-                src={item.image} 
-                alt={item.title}
-                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                <p className="text-white font-medium text-[10px] uppercase tracking-[0.2em]">{item.title}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="space-y-6 pt-4">
-          <div className="flex flex-wrap justify-center lg:justify-start gap-2">
-            {tags.map((tag) => (
-              <Badge
-                key={tag.name}
-                className={`rounded-md font-normal text-[12px] px-3 py-0.5 border-none shadow-none ${tag.color}`}
-              >
-                {tag.name}
-              </Badge>
-            ))}
-          </div>
-
-          <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.01] card-surface p-8 md:p-10 space-y-5">
-            <h3 className="text-2xl font-medium tracking-tight text-foreground/90 text-center lg:text-left">
-              Conversation topics
-            </h3>
-            <p className="text-lg md:text-xl text-muted-foreground font-normal leading-relaxed text-center lg:text-left max-w-3xl">
-              If you catch me at a coffee shop, on a chairlift, or after a meeting — these are the threads I naturally lean into.
-            </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
-              {convoTopics.map((t) => (
-                <Badge
-                  key={t.name}
-                  className={`rounded-md font-normal text-[12px] px-3 py-0.5 border-none shadow-none ${t.color}`}
-                >
-                  {t.name}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="space-y-16 border-t border-border/50 pt-32">
         <div className="space-y-6 max-w-3xl">
