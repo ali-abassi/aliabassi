@@ -1,326 +1,151 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrthographicCamera, useTexture } from "@react-three/drei";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+  MeshTransmissionMaterial,
+} from "@react-three/drei";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-type Pipe = {
-  x: number;
-  gapY: number;
-  scored: boolean;
-};
+function KineticSculpture() {
+  const group = useRef<THREE.Group>(null);
+  const pointer = useRef({ x: 0, y: 0 });
 
-function rand(min: number, max: number) {
-  return min + Math.random() * (max - min);
-}
-
-function FlappyGame({
-  onScore,
-  onGameOver,
-  running,
-}: {
-  onScore: (delta: number) => void;
-  onGameOver: () => void;
-  running: boolean;
-}) {
-  const playerX = -3.6;
-  const worldTop = 3.4;
-  const worldBottom = -3.4;
-  const gapSize = 2.15;
-  const pipeWidth = 1.1;
-  const speed = 3.1;
-  const gravity = 9.8;
-  const flapVel = 5.2;
-
-  const tex = useTexture("/sprites/ali-face.svg");
-  tex.colorSpace = THREE.SRGBColorSpace;
-
-  const player = useRef({ y: 0, vy: 0 });
-  const playerMesh = useRef<THREE.Mesh>(null);
-
-  const pipes = useRef<Pipe[]>(
-    Array.from({ length: 3 }).map((_, i) => ({
-      x: 4.5 + i * 4.2,
-      gapY: rand(-0.8, 0.8),
-      scored: false,
-    }))
-  );
-
-  const pipeTopRefs = useRef<Array<THREE.Mesh | null>>([]);
-  const pipeBottomRefs = useRef<Array<THREE.Mesh | null>>([]);
-
-  const flap = () => {
-    if (!running) return;
-    player.current.vy = flapVel;
-  };
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
-        e.preventDefault();
-        flap();
-      }
-    };
-    window.addEventListener("keydown", onKeyDown, { passive: false });
-    return () => window.removeEventListener("keydown", onKeyDown as any);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [running]);
-
-  useEffect(() => {
-    if (!running) return;
-    // reset when starting
-    player.current.y = 0;
-    player.current.vy = 0;
-    pipes.current = pipes.current.map((p, i) => ({
-      x: 4.5 + i * 4.2,
-      gapY: rand(-0.8, 0.8),
-      scored: false,
-    }));
-  }, [running]);
-
-  useFrame((_, dt) => {
-    const delta = Math.min(dt, 0.033);
-    if (!running) return;
-
-    // player integrate
-    player.current.vy -= gravity * delta;
-    player.current.y += player.current.vy * delta;
-
-    // clamp-ish: hit top/bottom = game over
-    if (player.current.y > worldTop - 0.35 || player.current.y < worldBottom + 0.35) {
-      onGameOver();
-      return;
-    }
-
-    // move pipes
-    for (const p of pipes.current) {
-      p.x -= speed * delta;
-      if (p.x < -6.5) {
-        p.x = 7.5;
-        p.gapY = rand(-0.9, 0.9);
-        p.scored = false;
-      }
-      if (!p.scored && p.x + pipeWidth / 2 < playerX) {
-        p.scored = true;
-        onScore(1);
-      }
-    }
-
-    // collisions (AABB)
-    const px = playerX;
-    const py = player.current.y;
-    const pw = 0.9;
-    const ph = 0.9;
-
-    for (const p of pipes.current) {
-      const gapTop = p.gapY + gapSize / 2;
-      const gapBottom = p.gapY - gapSize / 2;
-
-      // only check if near pipe x
-      if (Math.abs(p.x - px) > (pipeWidth / 2 + pw / 2)) continue;
-
-      // if player overlaps in x, check y outside gap
-      const inGap = py + ph / 2 < gapTop && py - ph / 2 > gapBottom;
-      if (!inGap) {
-        onGameOver();
-        return;
-      }
-    }
-
-    if (playerMesh.current) {
-      playerMesh.current.position.set(playerX, player.current.y, 0);
-      playerMesh.current.rotation.z = THREE.MathUtils.lerp(
-        playerMesh.current.rotation.z,
-        THREE.MathUtils.degToRad(clamp(player.current.vy * 7, -28, 28)),
-        0.12
-      );
-    }
-
-    // update pipe meshes
-    pipes.current.forEach((p, i) => {
-      const topH = worldTop - (p.gapY + gapSize / 2);
-      const botH = (p.gapY - gapSize / 2) - worldBottom;
-      const topY = p.gapY + gapSize / 2 + topH / 2;
-      const botY = worldBottom + botH / 2;
-
-      const topRef = pipeTopRefs.current[i];
-      const botRef = pipeBottomRefs.current[i];
-      if (topRef) {
-        topRef.position.set(p.x, topY, 0);
-        topRef.scale.set(pipeWidth, topH, 1);
-      }
-      if (botRef) {
-        botRef.position.set(p.x, botY, 0);
-        botRef.scale.set(pipeWidth, botH, 1);
-      }
-    });
-  });
-
-  const pipeMat = useMemo(
+  const metal = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
         color: "#0b0b0b",
-        roughness: 0.65,
-        metalness: 0.12,
+        roughness: 0.2,
+        metalness: 0.9,
       }),
     []
   );
 
-  const pipeCapMat = useMemo(
-    () =>
-      new THREE.MeshStandardMaterial({
-        color: "#111111",
-        roughness: 0.55,
-        metalness: 0.18,
-      }),
-    []
-  );
+  const particles = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const n = 420;
+    const positions = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const r = 3.4 * Math.pow(Math.random(), 0.55);
+      const theta = Math.random() * Math.PI * 2;
+      const y = (Math.random() - 0.5) * 2.2;
+      positions[i * 3 + 0] = Math.cos(theta) * r;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = Math.sin(theta) * r - 0.6;
+    }
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return geo;
+  }, []);
+
+  useFrame((state, dt) => {
+    const g = group.current;
+    if (!g) return;
+    const t = state.clock.getElapsedTime();
+
+    const targetY = pointer.current.x * 0.28;
+    const targetX = -pointer.current.y * 0.18;
+    g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, targetY + t * 0.12, 0.06);
+    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, targetX, 0.06);
+    g.position.y = Math.sin(t * 0.7) * 0.06;
+
+    // subtle breathing scale
+    const s = 1 + Math.sin(t * 0.5) * 0.01;
+    g.scale.set(s, s, s);
+  });
 
   return (
     <group
-      onPointerDown={() => flap()}
-      onPointerUp={() => undefined}
-      onPointerMissed={() => flap()}
+      ref={group}
+      onPointerMove={(e) => {
+        pointer.current.x = (e.uv?.x ?? 0.5) * 2 - 1;
+        pointer.current.y = (e.uv?.y ?? 0.5) * 2 - 1;
+      }}
     >
-      {/* background */}
-      <mesh position={[0, 0, -1]}>
-        <planeGeometry args={[40, 20]} />
-        <meshStandardMaterial color={"#ffffff"} roughness={1} metalness={0} />
+      {/* Soft particle field */}
+      <points geometry={particles}>
+        <pointsMaterial
+          color={"#000000"}
+          size={0.02}
+          sizeAttenuation
+          opacity={0.12}
+          transparent
+          depthWrite={false}
+        />
+      </points>
+
+      {/* Central glass form */}
+      <mesh castShadow receiveShadow>
+        <torusKnotGeometry args={[0.85, 0.26, 260, 18]} />
+        <MeshTransmissionMaterial
+          thickness={0.65}
+          roughness={0.08}
+          transmission={1}
+          ior={1.25}
+          chromaticAberration={0.03}
+          anisotropy={0.15}
+          distortion={0.2}
+          distortionScale={0.15}
+          temporalDistortion={0.12}
+        />
       </mesh>
 
-      {/* ground line */}
-      <mesh position={[0, worldBottom - 0.05, 0]}>
-        <planeGeometry args={[40, 0.12]} />
-        <meshStandardMaterial color={"#0b0b0b"} opacity={0.08} transparent />
+      {/* Metallic orbit ring */}
+      <mesh rotation-x={Math.PI / 2} position={[0, -0.1, 0]} material={metal}>
+        <torusGeometry args={[1.75, 0.04, 12, 220]} />
       </mesh>
 
-      {/* pipes */}
-      {pipes.current.map((_, i) => (
-        <group key={`pipe-${i}`}>
-          <mesh
-            ref={(el) => {
-              pipeTopRefs.current[i] = el;
-            }}
-            scale={[pipeWidth, 2, 1]}
-            material={pipeMat}
-          >
-            <boxGeometry args={[1, 1, 0.4]} />
-          </mesh>
-          <mesh
-            ref={(el) => {
-              pipeBottomRefs.current[i] = el;
-            }}
-            scale={[pipeWidth, 2, 1]}
-            material={pipeMat}
-          >
-            <boxGeometry args={[1, 1, 0.4]} />
-          </mesh>
-
-          {/* caps (subtle) */}
-          <mesh position={[0, 0, 0.24]} material={pipeCapMat} visible={false}>
-            <boxGeometry args={[1.18, 0.16, 0.2]} />
-          </mesh>
-        </group>
+      {/* Accent satellites */}
+      {new Array(9).fill(0).map((_, i) => (
+        <mesh
+          key={i}
+          position={[
+            Math.cos((i / 9) * Math.PI * 2) * 1.85,
+            Math.sin((i / 9) * Math.PI * 2) * 0.45,
+            Math.sin((i / 9) * Math.PI * 2) * 0.6,
+          ]}
+          material={metal}
+        >
+          <sphereGeometry args={[0.08, 24, 24]} />
+        </mesh>
       ))}
-
-      {/* player */}
-      <mesh ref={playerMesh} position={[playerX, 0, 0.4]}>
-        <planeGeometry args={[0.9, 0.9]} />
-        <meshBasicMaterial map={tex} transparent />
-      </mesh>
-
-      {/* light */}
-      <ambientLight intensity={1.0} />
-      <directionalLight position={[5, 8, 6]} intensity={0.7} />
     </group>
   );
 }
 
 export default function ThreeScene() {
-  const [score, setScore] = useState(0);
-  const [best, setBest] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-
-  const start = () => {
-    setScore(0);
-    setGameOver(false);
-    setRunning(true);
-  };
-
   return (
-    <div className="w-full h-full bg-white dark:bg-black relative">
-      <div className="absolute top-5 left-5 z-10 rounded-2xl border border-border/40 bg-background/80 backdrop-blur-md px-4 py-3 card-surface">
-        <div className="text-[11px] text-muted-foreground/70 font-normal">
-          Score
-        </div>
-        <div className="text-xl font-medium tracking-tight tabular-nums text-foreground/90">
-          {score}
-        </div>
-      </div>
+    <div className="w-full h-full bg-white dark:bg-black">
+      <Canvas
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true }}
+        shadows
+      >
+        <color attach="background" args={["#ffffff"]} />
+        <fog attach="fog" args={["#ffffff", 8, 16]} />
 
-      <div className="absolute top-5 right-5 z-10 rounded-2xl border border-border/40 bg-background/70 backdrop-blur-md px-4 py-3">
-        <div className="text-[11px] text-muted-foreground/70 font-normal">
-          Best
-        </div>
-        <div className="text-xl font-medium tracking-tight tabular-nums text-foreground/90">
-          {best}
-        </div>
-      </div>
+        <PerspectiveCamera makeDefault position={[0, 0.6, 6.2]} fov={42} />
 
-      <div className="absolute bottom-5 left-5 z-10 rounded-2xl border border-border/40 bg-background/70 backdrop-blur-md px-4 py-3">
-        <div className="text-[11px] text-muted-foreground/70 font-normal">
-          Click or Space to flap
-        </div>
-      </div>
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[6, 8, 6]} intensity={1.1} castShadow />
+        <pointLight position={[-6, 4, 4]} intensity={0.6} />
 
-      {!running ? (
-        <button
-          type="button"
-          onClick={start}
-          className="absolute inset-0 z-10 flex items-center justify-center bg-transparent"
-          aria-label="Start game"
-        >
-          <div className="rounded-[2.5rem] border border-border/40 bg-background/75 backdrop-blur-md px-8 py-6 card-surface text-center space-y-2">
-            <div className="text-xl font-medium tracking-tight text-foreground/90">
-              Ali Flappy
-            </div>
-            <div className="text-sm text-muted-foreground/70 font-normal">
-              Click to start · Space to flap
-            </div>
-          </div>
-        </button>
-      ) : null}
+        <KineticSculpture />
 
-      {gameOver ? (
-        <button
-          type="button"
-          onClick={start}
-          className="absolute inset-0 z-10 flex items-center justify-center bg-transparent"
-          aria-label="Restart game"
-        >
-          <div className="rounded-[2.5rem] border border-border/40 bg-background/75 backdrop-blur-md px-8 py-6 card-surface text-center space-y-2">
-            <div className="text-xl font-medium tracking-tight text-foreground/90">
-              Game over
-            </div>
-            <div className="text-sm text-muted-foreground/70 font-normal">
-              Click to restart
-            </div>
-          </div>
-        </button>
-      ) : null}
+        <mesh rotation-x={-Math.PI / 2} position={[0, -1.65, 0]} receiveShadow>
+          <planeGeometry args={[40, 40]} />
+          <shadowMaterial opacity={0.16} />
+        </mesh>
 
-      <Canvas>
-        <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={70} />
-        <FlappyGame
-          running={running && !gameOver}
-          onScore={(delta) => setScore((s) => s + delta)}
-          onGameOver={() => {
-            setGameOver(true);
-            setRunning(false);
-            setBest((b) => Math.max(b, score));
-          }}
+        <Environment preset="warehouse" />
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          rotateSpeed={0.6}
+          autoRotate
+          autoRotateSpeed={0.35}
         />
       </Canvas>
     </div>
