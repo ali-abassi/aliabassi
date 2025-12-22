@@ -35,8 +35,8 @@ export function Footer() {
             <h4 className="text-sm font-medium text-muted-foreground/70">Navigation</h4>
             <ul className="space-y-5 text-base">
               <li><Link href="/" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Home <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
-              <li><Link href="/work" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Work <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><Link href="/tools" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Tools <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
+              <li><Link href="/work" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Work <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><Link href="/about" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">About <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
             </ul>
           </div>

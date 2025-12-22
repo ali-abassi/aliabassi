@@ -7,10 +7,10 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "Work", path: "/work" },
   { name: "Tools", path: "/tools" },
-  { name: "About", path: "/about" },
+  { name: "Work", path: "/work" },
   { name: "Thoughts", path: "/content" },
+  { name: "About", path: "/about" },
 ];
 
 export function Navbar() {
