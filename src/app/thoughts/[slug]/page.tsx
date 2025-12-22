@@ -52,13 +52,13 @@ export default async function ThoughtPage({ params }: Props) {
       <div className="max-w-5xl mx-auto px-6 pt-32 pb-16 space-y-16">
         <Link 
           href="/content" 
-          className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors no-underline group uppercase tracking-widest"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors no-underline group"
         >
           <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Back to Content
         </Link>
 
         <div className="space-y-10">
-          <div className="flex flex-wrap items-center gap-8 text-[10px] font-medium text-muted-foreground uppercase tracking-[0.3em]">
+          <div className="flex flex-wrap items-center gap-8 text-sm font-normal text-muted-foreground/70">
             <div className="flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-foreground/10" /> {thought.date}
             </div>
@@ -91,12 +91,12 @@ export default async function ThoughtPage({ params }: Props) {
       {/* Article Body */}
       <div className="max-w-4xl mx-auto px-6">
         <article 
-          className="prose prose-zinc dark:prose-invert prose-lg md:prose-xl max-w-none 
+          className="prose prose-zinc dark:prose-invert prose-base md:prose-lg max-w-none 
           prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground/80
-          prose-p:text-muted-foreground/90 prose-p:font-normal prose-p:leading-relaxed prose-p:text-lg md:prose-p:xl
-          prose-strong:text-foreground prose-strong:font-medium
+          prose-p:text-muted-foreground/90 prose-p:font-normal prose-p:leading-relaxed prose-p:text-base md:prose-p:text-lg
+          prose-strong:text-foreground prose-strong:font-normal
           prose-blockquote:border-l prose-blockquote:border-foreground/10 prose-blockquote:bg-muted/[0.03] prose-blockquote:py-8 prose-blockquote:px-12 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-foreground/70
-          prose-li:text-muted-foreground/80 prose-li:text-lg
+          prose-li:text-muted-foreground/80 prose-li:text-base md:prose-li:text-lg
           prose-img:rounded-3xl prose-img:border prose-img:border-border/30
           flex-1"
           dangerouslySetInnerHTML={{ __html: thought.content }}
@@ -128,7 +128,7 @@ export default async function ThoughtPage({ params }: Props) {
 
         {thought.sources.length > 0 && (
           <section className="space-y-10 border-t border-border/50 pt-24">
-            <h2 className="text-[10px] font-medium uppercase tracking-[0.3em] text-foreground/20 font-mono">Sources & References</h2>
+            <h2 className="text-sm font-medium text-foreground/50">Sources</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {thought.sources.map((source) => (
                 <a 

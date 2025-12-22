@@ -48,11 +48,23 @@ export const thoughts: Thought[] = [
     faqs: [
       {
         question: "What is an AI agent?",
-        answer: "An AI agent is a system that uses an LLM as its reasoning engine to autonomously execute tasks, use tools, and interact with other systems to achieve a specific goal."
+        answer: "An AI agent is a system that uses an LLM as its reasoning engine to autonomously plan and execute tasks using tools (APIs), memory, and policies to achieve a goal."
+      },
+      {
+        question: "What does “agent orchestration” mean in practice?",
+        answer: "Orchestration is the runtime layer that routes tasks between specialized agents (planner, tool-runner, verifier), manages state/memory, and enforces guardrails like schemas and permissions."
+      },
+      {
+        question: "When should you use multiple agents instead of one model?",
+        answer: "Use multiple agents when you need separation of concerns: planning vs execution vs verification, parallel work, or deterministic constraints that are easier to enforce with dedicated roles."
       },
       {
         question: "How do you prevent hallucinations in multi-agent systems?",
-        answer: "Hallucinations are mitigated through rigorous verification loops, where one agent's output is cross-referenced by a critic agent or validated against structured data before final execution."
+        answer: "Use retrieval with trusted sources, strict structured outputs (schemas), tool-backed verification for claims, and a critic/validator step before taking any external action."
+      },
+      {
+        question: "What is the biggest failure mode of agent systems?",
+        answer: "The most common failure is uncontrolled tool use: agents calling the wrong tools, with the wrong parameters, or without adequate checks—leading to silent corruption instead of obvious errors."
       }
     ],
     sources: [
@@ -82,7 +94,23 @@ export const thoughts: Thought[] = [
     faqs: [
       {
         question: "What is a Forward Deployed Engineer?",
-        answer: "A Forward Deployed Engineer (FDE) works at the intersection of product, engineering, and the customer, building tailored technical solutions that solve specific, high-impact business problems."
+        answer: "A Forward Deployed Engineer (FDE) works at the intersection of product, engineering, and the customer, building tailored technical solutions that solve high-impact business problems."
+      },
+      {
+        question: "What does “design-driven implementation” mean?",
+        answer: "It means the interface, user flow, and adoption path are treated as first-class technical requirements—alongside architecture, security, and performance."
+      },
+      {
+        question: "How do you make AI features feel trustworthy?",
+        answer: "Make actions observable and reversible: show inputs, show what the system is about to do, expose sources, and provide safe overrides instead of hiding complexity."
+      },
+      {
+        question: "What is Implementation Experience (IX)?",
+        answer: "IX is how frictionless it is for a team to adopt and rely on a new system. Great IX means fast time-to-value, low training burden, and predictable behavior under stress."
+      },
+      {
+        question: "What are common UX mistakes in AI products?",
+        answer: "Overconfidence, unclear failure states, no visibility into sources/tool use, and interfaces that don’t match how teams actually work day-to-day."
       }
     ],
     sources: [
@@ -110,8 +138,24 @@ export const thoughts: Thought[] = [
     `,
     faqs: [
       {
+        question: "What’s the hardest part of scaling LLM infrastructure?",
+        answer: "Keeping latency predictable while costs stay bounded—especially when usage is bursty and requests vary massively in complexity."
+      },
+      {
         question: "How do you manage LLM costs at scale?",
-        answer: "Costs are managed through a combination of model distillation, prompt optimization, and aggressive caching of frequently requested tokens."
+        answer: "Use routing (cheap model for easy tasks), caching, prompt compression, smaller context windows, batch/async flows, and aggressive observability to remove waste."
+      },
+      {
+        question: "How do you handle rate limits reliably?",
+        answer: "Queueing, backoff, prioritization, and fallbacks—plus proactive load shedding and per-customer budgets so one tenant can’t degrade the whole system."
+      },
+      {
+        question: "What’s “semantic drift” and why does it matter?",
+        answer: "It’s when the meaning of prompts/outputs changes due to model updates, data shifts, or tool changes—breaking downstream assumptions in subtle ways."
+      },
+      {
+        question: "How do you test LLM systems like software?",
+        answer: "Golden sets + eval harnesses, regression tests on prompts and tool schemas, and canary deployments that measure quality deltas before full rollout."
       }
     ],
     sources: [
@@ -132,8 +176,24 @@ export const thoughts: Thought[] = [
     `,
     faqs: [
       {
-        question: "Is zero-hallucination actually possible?",
-        answer: "While models themselves may always have a probabilistic nature, the *system* can be designed for zero-hallucination by requiring external verification for every factual claim."
+        question: "Is “zero-hallucination” actually possible?",
+        answer: "A model is probabilistic, but the system can be engineered to avoid unverified factual claims via retrieval constraints, tool checks, and strict output schemas."
+      },
+      {
+        question: "What UI patterns reduce hallucinations?",
+        answer: "Source citations, “show what you used” panels, confirmation steps before actions, and clear boundaries between inferred vs verified information."
+      },
+      {
+        question: "How do you handle uncertainty in the interface?",
+        answer: "Expose confidence through language and UI state: ask clarifying questions, show missing inputs, and provide safe defaults instead of guessing."
+      },
+      {
+        question: "What’s the role of structured output in accuracy?",
+        answer: "Schemas constrain the model’s output to valid shapes, making parsing reliable and reducing the chance of free-form, made-up content leaking into actions."
+      },
+      {
+        question: "What’s the biggest trust-killer in AI UX?",
+        answer: "A confident wrong answer. The second is hidden automation—users need transparency and reversibility to feel safe adopting the system."
       }
     ],
     sources: [
@@ -155,7 +215,23 @@ export const thoughts: Thought[] = [
     faqs: [
       {
         question: "How does a marketing background help in AI engineering?",
-        answer: "It provides a deep understanding of user needs and business value, which is critical when implementing complex AI solutions that must be adopted by non-technical teams."
+        answer: "It builds an outcomes mindset: shipping systems that drive adoption, conversion, and retention—not just technically correct implementations."
+      },
+      {
+        question: "What’s the overlap between growth and forward-deployed work?",
+        answer: "Both are close to the customer. You learn fast by shipping, measuring, and iterating based on real-world feedback instead of internal assumptions."
+      },
+      {
+        question: "How do you decide what to build first?",
+        answer: "Start with a high-friction workflow where reliability and time saved are measurable. Then build the smallest agent/tooling surface that delivers value."
+      },
+      {
+        question: "How do you balance speed with quality?",
+        answer: "Prototype quickly, then harden: add evals, guardrails, observability, and rollback paths before scaling usage."
+      },
+      {
+        question: "What skill translates the most from growth to engineering?",
+        answer: "Clear communication. Whether it’s users, stakeholders, or models, clarity is leverage—requirements, constraints, and feedback loops become sharper."
       }
     ],
     sources: []
