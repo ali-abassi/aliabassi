@@ -27,20 +27,23 @@ export function Navbar() {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-md border-b py-3" : "bg-transparent py-6"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
+        scrolled ? "py-4" : "py-8"
       )}
     >
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className={cn(
+          "flex items-center justify-between p-2 rounded-full border transition-all duration-500 ease-in-out",
+          scrolled ? "bg-background/70 backdrop-blur-xl border-border/50 shadow-2xl shadow-black/5 px-6" : "bg-transparent border-transparent px-2"
+        )}>
           <Link
             href="/"
-            className="text-xl font-bold tracking-tighter hover:opacity-70 transition-opacity"
+            className="text-xl font-black tracking-tightest hover:opacity-70 transition-opacity"
           >
-            Ali Abassi
+            AA.
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-2">
             {navItems.map((item) => {
               const active = pathname === item.path;
               return (
@@ -48,8 +51,10 @@ export function Navbar() {
                   key={item.path}
                   href={item.path}
                   className={cn(
-                    "text-sm font-medium transition-all hover:text-foreground",
-                    active ? "text-foreground" : "text-muted-foreground"
+                    "text-xs font-black uppercase tracking-widest px-5 py-2 rounded-full transition-all duration-300",
+                    active 
+                      ? "bg-foreground text-background shadow-lg shadow-black/10" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   )}
                 >
                   {item.name}
@@ -60,11 +65,14 @@ export function Navbar() {
 
           <button
             type="button"
-            className="md:hidden p-2 hover:bg-muted rounded-md transition-colors"
+            className={cn(
+              "md:hidden p-3 rounded-full transition-colors",
+              scrolled ? "bg-muted/50" : "bg-background shadow-xl border"
+            )}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -72,22 +80,36 @@ export function Navbar() {
       {/* Mobile Nav */}
       <div 
         className={cn(
-          "absolute top-full left-0 right-0 bg-background border-b overflow-hidden transition-all duration-300 md:hidden",
-          open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          "fixed inset-0 top-0 left-0 right-0 bottom-0 bg-background z-[60] flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-in-out md:hidden",
+          open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         )}
       >
-        <nav className="flex flex-col p-6 gap-4">
+        <button
+          type="button"
+          className="absolute top-8 right-6 p-4 rounded-full bg-muted"
+          onClick={() => setOpen(false)}
+        >
+          <X className="w-8 h-8" />
+        </button>
+        <nav className="flex flex-col items-center gap-10">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="text-2xl font-black tracking-tightest"
+          >
+            HOME.
+          </Link>
           {navItems.map((item) => (
             <Link
               key={item.path}
               href={item.path}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-lg font-semibold",
-                pathname === item.path ? "text-foreground" : "text-muted-foreground"
+                "text-4xl font-black tracking-tightest uppercase",
+                pathname === item.path ? "text-foreground underline decoration-8 underline-offset-8" : "text-muted-foreground"
               )}
             >
-              {item.name}
+              {item.name}.
             </Link>
           ))}
         </nav>
