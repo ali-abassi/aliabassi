@@ -16,16 +16,19 @@ export function Footer() {
               Senior AI Implementation Engineer focusing on the intersection of AI, design, and technical engineering.
             </p>
             <div className="flex gap-5">
-              <a href="https://twitter.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://twitter.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors" title="X (Twitter)">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://github.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors" title="GitHub">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="https://linkedin.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://linkedin.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors" title="LinkedIn">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="mailto:hello@aliabassi.com" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://youtube.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors" title="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg>
+              </a>
+              <a href="mailto:hello@aliabassi.com" className="text-muted-foreground hover:text-foreground transition-colors" title="Email">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
@@ -51,8 +54,8 @@ export function Footer() {
         </div>
 
         <div className="mt-12 md:mt-20 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-muted-foreground">
-          <p>© {new Date().getFullYear()} Ali Abassi. All rights reserved.</p>
-          <p>Built with Next.js, Shadcn, and Three.js.</p>
+          <p>The personal site of Ali Abassi.</p>
+          <p>Designed for speed, built for the future.</p>
         </div>
       </div>
     </footer>

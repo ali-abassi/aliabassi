@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const platforms = [
   { 
-    name: "Twitter / X", 
+    name: "X (Twitter)", 
     username: "@aliabassi", 
     icon: Twitter, 
     url: "https://twitter.com",
@@ -30,7 +30,7 @@ const platforms = [
   },
   { 
     name: "YouTube", 
-    username: "Ali Abassi", 
+    username: "@AliAbassi", 
     icon: Youtube, 
     url: "https://youtube.com",
     description: "Video deep-dives into technical workflows."

@@ -33,14 +33,17 @@ export default function Home() {
             </div>
 
             <div className="flex gap-6 justify-center md:justify-start pt-4 text-muted-foreground">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline flex items-center gap-2 text-sm font-semibold tracking-tight">
-                <Github className="w-5 h-5" /> GitHub
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors" title="GitHub">
+                <Github className="w-6 h-6" />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline flex items-center gap-2 text-sm font-semibold tracking-tight">
-                <Twitter className="w-5 h-5" /> Twitter
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors" title="X (Twitter)">
+                <Twitter className="w-6 h-6" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline flex items-center gap-2 text-sm font-semibold tracking-tight">
-                <Linkedin className="w-5 h-5" /> LinkedIn
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors" title="LinkedIn">
+                <Linkedin className="w-6 h-6" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors" title="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg>
               </a>
             </div>
           </div>
