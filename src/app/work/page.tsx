@@ -155,7 +155,7 @@ export default async function WorkPage({ searchParams }: Props) {
   return (
     <main className="max-w-7xl mx-auto px-6 py-24 md:py-32 space-y-16">
       <header className="space-y-10">
-        <div className="space-y-5 max-w-3xl text-left">
+        <div className="space-y-5 max-w-3xl text-center mx-auto">
           <h1 className="text-5xl md:text-7xl font-semibold tracking-tightest">
             Work
           </h1>
@@ -164,7 +164,7 @@ export default async function WorkPage({ searchParams }: Props) {
           </p>
         </div>
 
-        <div className="flex items-center justify-start gap-2">
+        <div className="flex items-center justify-center gap-2">
           <TabLink href="/work?view=employee" active={view === "employee"}>
             Employee
           </TabLink>
