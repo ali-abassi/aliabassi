@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" role="img" aria-label="Bland AI">
+  <rect width="320" height="80" fill="none"/>
+  <g fill="#000">
+    <circle cx="40" cy="40" r="28" fill="none" stroke="#000" stroke-width="4"/>
+    <circle cx="40" cy="40" r="6" fill="#000"/>
+    <text x="90" y="52" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial" font-size="38" font-weight="800" letter-spacing="2">BLAND AI</text>
+  </g>
+</svg>
+
