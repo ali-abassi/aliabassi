@@ -67,7 +67,7 @@ export default function ContentPage() {
                     <img 
                       src={thought.image} 
                       alt={thought.title}
-                      className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-[1.03] grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0"
+                      className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-[1.03]"
                     />
                   </div>
                 </div>
