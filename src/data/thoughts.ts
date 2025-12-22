@@ -27,7 +27,7 @@ export const thoughts: Thought[] = [
     date: "Dec 22, 2025",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
     content: `
-      <p>As we move into 2026, the paradigm of AI interaction is shifting rapidly. We are moving away from the "chat box" model where a human manually prompts a single model, and toward **autonomous orchestration**.</p>
+      <p>As we move into 2026, the paradigm of AI interaction is shifting rapidly. We are moving away from the "chat box" model where a human manually prompts a single model, and toward <strong>autonomous orchestration</strong>.</p>
       
       <h3>The Multi-Agent Paradigm</h3>
       <p>In a production-grade environment, a single LLM is rarely enough. The most effective systems utilize a team of specialized agents—one for reasoning, one for tool execution, and one for quality assurance.</p>
@@ -79,7 +79,7 @@ export const thoughts: Thought[] = [
     date: "Dec 15, 2025",
     image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
     content: `
-      <p>Technical engineering is often seen as a purely logical pursuit. But in the world of **AI Forward Deployed Engineering**, design is a core technical requirement.</p>
+      <p>Technical engineering is often seen as a purely logical pursuit. But in the world of <strong>AI Forward Deployed Engineering</strong>, design is a core technical requirement.</p>
       
       <h3>Bridging the Gap</h3>
       <p>An implementation engineer who doesn't understand UX is building a bridge that nobody wants to cross. We need to focus on the "Implementation Experience" (IX)—how seamlessly a new AI solution fits into an existing enterprise workflow.</p>
@@ -124,7 +124,7 @@ export const thoughts: Thought[] = [
     date: "Dec 08, 2025",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
     content: `
-      <p>Deploying a prototype is easy. Deploying a system that handles **100,000 requests per minute** with consistent sub-second latency is where the real engineering happens.</p>
+      <p>Deploying a prototype is easy. Deploying a system that handles <strong>100,000 requests per minute</strong> with consistent sub-second latency is where the real engineering happens.</p>
       
       <h3>The Bottlenecks</h3>
       <p>Enterprise AI scaling faces three primary bottlenecks: Rate limits, Token costs, and Semantic drift.</p>
@@ -169,7 +169,7 @@ export const thoughts: Thought[] = [
     date: "Dec 01, 2025",
     image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=800",
     content: `
-      <p>Trust is the hardest currency to earn in the AI era. One hallucination can destroy months of user confidence. The solution isn't just better models—it's **better interfaces**.</p>
+      <p>Trust is the hardest currency to earn in the AI era. One hallucination can destroy months of user confidence. The solution isn't just better models—it's <strong>better interfaces</strong>.</p>
       
       <h3>The "Show Your Work" Pattern</h3>
       <p>By exposing the reasoning steps of an agent in the UI, we allow users to verify the logic before the final action is taken. This turns the AI from a "black box" into a collaborative partner.</p>
@@ -207,7 +207,7 @@ export const thoughts: Thought[] = [
     date: "Nov 24, 2025",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
     content: `
-      <p>My career didn't start in a IDE. It started in the world of **growth marketing** and **business development**. This unconventional path has become my greatest strength as an engineer.</p>
+      <p>My career didn't start in a IDE. It started in the world of <strong>growth marketing</strong> and <strong>business development</strong>. This unconventional path has become my greatest strength as an engineer.</p>
       
       <h3>Engineering for Outcomes</h3>
       <p>In marketing, everything is measured by conversion and impact. I carry this same mindset into my code. I don't just ask "Does the code run?" I ask "Does this implementation move the needle for the customer?"</p>

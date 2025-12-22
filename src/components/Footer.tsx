@@ -32,8 +32,8 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3 space-y-8">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/20">Navigation</h4>
-            <ul className="space-y-6 text-lg font-medium">
+            <h4 className="text-sm font-medium text-muted-foreground/70">Navigation</h4>
+            <ul className="space-y-5 text-base">
               <li><Link href="/" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Home <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><Link href="/work" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Work <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><Link href="/tools" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Tools <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
@@ -42,15 +42,15 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3 space-y-8">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground/20">Latest</h4>
-            <ul className="space-y-6 text-lg font-medium">
+            <h4 className="text-sm font-medium text-muted-foreground/70">Latest</h4>
+            <ul className="space-y-5 text-base">
               <li><Link href="/content" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Content <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><a href="/sitemap.xml" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Sitemap <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></a ></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-24 pt-12 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-medium uppercase tracking-[0.4em] text-muted-foreground/40">
+        <div className="mt-24 pt-12 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-normal text-muted-foreground/60">
           <p className="text-center md:text-left">Designed for speed, built for the future.</p>
           <p className="text-center md:text-right">The personal site of Ali Abassi.</p>
         </div>
