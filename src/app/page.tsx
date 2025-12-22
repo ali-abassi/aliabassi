@@ -136,7 +136,7 @@ export default function Home() {
               <div className="w-full h-full border border-border/30 rounded-[2.75rem] overflow-hidden shadow-2xl shadow-black/5 bg-background relative z-10 transition-transform duration-700 group-hover:scale-[1.01]">
                 <ThreeScene />
                 <div className="absolute bottom-6 right-6 px-4 py-2 bg-background/80 backdrop-blur-md border border-border/30 rounded-2xl text-[11px] font-medium text-muted-foreground/60 pointer-events-none">
-                  Basketball mini-game
+                  Ali Flappy
                 </div>
               </div>
             </div>

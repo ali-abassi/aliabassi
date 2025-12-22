@@ -1,275 +1,253 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
-import { useMemo, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrthographicCamera, useTexture } from "@react-three/drei";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
-type ShotState = {
-  inFlight: boolean;
-  scoredThisShot: boolean;
-  t: number;
-  pos: THREE.Vector3;
-  prevPos: THREE.Vector3;
-  vel: THREE.Vector3;
+type Pipe = {
+  x: number;
+  gapY: number;
+  scored: boolean;
 };
 
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
+function rand(min: number, max: number) {
+  return min + Math.random() * (max - min);
 }
 
-function BasketballGame({
+function FlappyGame({
   onScore,
+  onGameOver,
+  running,
 }: {
   onScore: (delta: number) => void;
+  onGameOver: () => void;
+  running: boolean;
 }) {
-  const { size, camera } = useThree();
+  const playerX = -3.6;
+  const worldTop = 3.4;
+  const worldBottom = -3.4;
+  const gapSize = 2.15;
+  const pipeWidth = 1.1;
+  const speed = 3.1;
+  const gravity = 9.8;
+  const flapVel = 5.2;
 
-  const ballRef = useRef<THREE.Mesh>(null);
-  const aimRef = useRef<THREE.Line>(null);
+  const tex = useTexture("/sprites/ali-face.svg");
+  tex.colorSpace = THREE.SRGBColorSpace;
 
-  const hoopCenter = useMemo(() => new THREE.Vector3(0, 2.85, -8), []);
-  const ballStart = useMemo(() => new THREE.Vector3(0, 1.35, 5.2), []);
-  const gravity = 6.2;
+  const player = useRef({ y: 0, vy: 0 });
+  const playerMesh = useRef<THREE.Mesh>(null);
 
-  const shot = useRef<ShotState>({
-    inFlight: false,
-    scoredThisShot: false,
-    t: 0,
-    pos: ballStart.clone(),
-    prevPos: ballStart.clone(),
-    vel: new THREE.Vector3(0, 0, 0),
-  });
+  const pipes = useRef<Pipe[]>(
+    Array.from({ length: 3 }).map((_, i) => ({
+      x: 4.5 + i * 4.2,
+      gapY: rand(-0.8, 0.8),
+      scored: false,
+    }))
+  );
 
-  const drag = useRef<{
-    active: boolean;
-    startX: number;
-    startY: number;
-    x: number;
-    y: number;
-  }>({ active: false, startX: 0, startY: 0, x: 0, y: 0 });
+  const pipeTopRefs = useRef<Array<THREE.Mesh | null>>([]);
+  const pipeBottomRefs = useRef<Array<THREE.Mesh | null>>([]);
 
-  const [hint, setHint] = useState<"idle" | "aim" | "shot">("idle");
+  const flap = () => {
+    if (!running) return;
+    player.current.vy = flapVel;
+  };
 
-  const updateAimLine = () => {
-    const line = aimRef.current;
-    if (!line) return;
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        flap();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown, { passive: false });
+    return () => window.removeEventListener("keydown", onKeyDown as any);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [running]);
 
-    const { active, startX, startY, x, y } = drag.current;
-    if (!active) {
-      line.visible = false;
+  useEffect(() => {
+    if (!running) return;
+    // reset when starting
+    player.current.y = 0;
+    player.current.vy = 0;
+    pipes.current = pipes.current.map((p, i) => ({
+      x: 4.5 + i * 4.2,
+      gapY: rand(-0.8, 0.8),
+      scored: false,
+    }));
+  }, [running]);
+
+  useFrame((_, dt) => {
+    const delta = Math.min(dt, 0.033);
+    if (!running) return;
+
+    // player integrate
+    player.current.vy -= gravity * delta;
+    player.current.y += player.current.vy * delta;
+
+    // clamp-ish: hit top/bottom = game over
+    if (player.current.y > worldTop - 0.35 || player.current.y < worldBottom + 0.35) {
+      onGameOver();
       return;
     }
 
-    const dx = (x - startX) / size.width;
-    const dy = (y - startY) / size.height;
-    const power = clamp(-dy * 18, 0, 1.4);
-
-    // Aim direction (slight upward arc + left/right influence)
-    const dir = new THREE.Vector3(dx * 1.6, 0.9 + power * 1.25, -3.1 - power * 1.8)
-      .normalize()
-      .multiplyScalar(4.6 + power * 5.5);
-
-    const a = ballStart.clone();
-    const b = ballStart.clone().add(dir);
-    (line.geometry as THREE.BufferGeometry).setFromPoints([a, b]);
-    line.visible = true;
-  };
-
-  const resetBall = () => {
-    shot.current.inFlight = false;
-    shot.current.scoredThisShot = false;
-    shot.current.t = 0;
-    shot.current.pos.copy(ballStart);
-    shot.current.prevPos.copy(ballStart);
-    shot.current.vel.set(0, 0, 0);
-    if (ballRef.current) ballRef.current.position.copy(ballStart);
-  };
-
-  useFrame((_, delta) => {
-    // Keep camera stable
-    camera.position.lerp(new THREE.Vector3(0, 2.2, 10.5), 0.08);
-    camera.lookAt(0, 1.8, -3.5);
-
-    updateAimLine();
-
-    if (!shot.current.inFlight) return;
-
-    shot.current.t += delta;
-    shot.current.prevPos.copy(shot.current.pos);
-
-    // Integrate
-    shot.current.vel.y -= gravity * delta;
-    shot.current.pos.addScaledVector(shot.current.vel, delta);
-
-    // Ground bounce
-    const groundY = 0.3;
-    if (shot.current.pos.y < groundY) {
-      shot.current.pos.y = groundY;
-      if (shot.current.vel.y < 0) {
-        shot.current.vel.y *= -0.42;
-        shot.current.vel.x *= 0.72;
-        shot.current.vel.z *= 0.72;
+    // move pipes
+    for (const p of pipes.current) {
+      p.x -= speed * delta;
+      if (p.x < -6.5) {
+        p.x = 7.5;
+        p.gapY = rand(-0.9, 0.9);
+        p.scored = false;
       }
-      // Stop if mostly settled
-      if (shot.current.t > 1.2 && shot.current.vel.length() < 0.6) {
-        resetBall();
-        setHint("idle");
+      if (!p.scored && p.x + pipeWidth / 2 < playerX) {
+        p.scored = true;
+        onScore(1);
       }
     }
 
-    // Backboard bounce (simple plane)
-    const backboardZ = -8.55;
-    if (shot.current.pos.z < backboardZ) {
-      shot.current.pos.z = backboardZ;
-      shot.current.vel.z *= -0.35;
-      shot.current.vel.x *= 0.92;
+    // collisions (AABB)
+    const px = playerX;
+    const py = player.current.y;
+    const pw = 0.9;
+    const ph = 0.9;
+
+    for (const p of pipes.current) {
+      const gapTop = p.gapY + gapSize / 2;
+      const gapBottom = p.gapY - gapSize / 2;
+
+      // only check if near pipe x
+      if (Math.abs(p.x - px) > (pipeWidth / 2 + pw / 2)) continue;
+
+      // if player overlaps in x, check y outside gap
+      const inGap = py + ph / 2 < gapTop && py - ph / 2 > gapBottom;
+      if (!inGap) {
+        onGameOver();
+        return;
+      }
     }
 
-    // Rim "make" detection: cross the rim plane downward near hoop center
-    const rimY = hoopCenter.y;
-    const dz = Math.abs(shot.current.pos.z - hoopCenter.z);
-    const dXZ = Math.hypot(shot.current.pos.x - hoopCenter.x, shot.current.pos.z - hoopCenter.z);
-    const crossedDown =
-      shot.current.prevPos.y > rimY && shot.current.pos.y <= rimY;
-
-    if (
-      !shot.current.scoredThisShot &&
-      crossedDown &&
-      dz < 0.55 &&
-      dXZ < 0.42
-    ) {
-      shot.current.scoredThisShot = true;
-      onScore(3);
+    if (playerMesh.current) {
+      playerMesh.current.position.set(playerX, player.current.y, 0);
+      playerMesh.current.rotation.z = THREE.MathUtils.lerp(
+        playerMesh.current.rotation.z,
+        THREE.MathUtils.degToRad(clamp(player.current.vy * 7, -28, 28)),
+        0.12
+      );
     }
 
-    // Timeout reset
-    if (shot.current.t > 6.5) {
-      resetBall();
-      setHint("idle");
-    }
+    // update pipe meshes
+    pipes.current.forEach((p, i) => {
+      const topH = worldTop - (p.gapY + gapSize / 2);
+      const botH = (p.gapY - gapSize / 2) - worldBottom;
+      const topY = p.gapY + gapSize / 2 + topH / 2;
+      const botY = worldBottom + botH / 2;
 
-    if (ballRef.current) ballRef.current.position.copy(shot.current.pos);
+      const topRef = pipeTopRefs.current[i];
+      const botRef = pipeBottomRefs.current[i];
+      if (topRef) {
+        topRef.position.set(p.x, topY, 0);
+        topRef.scale.set(pipeWidth, topH, 1);
+      }
+      if (botRef) {
+        botRef.position.set(p.x, botY, 0);
+        botRef.scale.set(pipeWidth, botH, 1);
+      }
+    });
   });
+
+  const pipeMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#0b0b0b",
+        roughness: 0.65,
+        metalness: 0.12,
+      }),
+    []
+  );
+
+  const pipeCapMat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#111111",
+        roughness: 0.55,
+        metalness: 0.18,
+      }),
+    []
+  );
 
   return (
     <group
-      onPointerDown={(e) => {
-        if (shot.current.inFlight) return;
-        drag.current.active = true;
-        drag.current.startX = e.clientX;
-        drag.current.startY = e.clientY;
-        drag.current.x = e.clientX;
-        drag.current.y = e.clientY;
-        setHint("aim");
-      }}
-      onPointerMove={(e) => {
-        if (!drag.current.active) return;
-        drag.current.x = e.clientX;
-        drag.current.y = e.clientY;
-      }}
-      onPointerUp={(e) => {
-        if (!drag.current.active) return;
-        drag.current.active = false;
-
-        const dx = (e.clientX - drag.current.startX) / size.width;
-        const dy = (e.clientY - drag.current.startY) / size.height;
-        const power = clamp(-dy * 18, 0.0, 1.4);
-
-        // Shoot vector: z forward, with arc
-        const vel = new THREE.Vector3(
-          clamp(dx * 7.5, -4.2, 4.2),
-          5.6 + power * 6.5,
-          -(10.0 + power * 8.5)
-        );
-
-        shot.current.inFlight = true;
-        shot.current.scoredThisShot = false;
-        shot.current.t = 0;
-        shot.current.pos.copy(ballStart);
-        shot.current.prevPos.copy(ballStart);
-        shot.current.vel.copy(vel);
-
-        setHint("shot");
-        if (aimRef.current) aimRef.current.visible = false;
-      }}
-      onPointerLeave={() => {
-        drag.current.active = false;
-        if (aimRef.current) aimRef.current.visible = false;
-        if (!shot.current.inFlight) setHint("idle");
-      }}
+      onPointerDown={() => flap()}
+      onPointerUp={() => undefined}
+      onPointerMissed={() => flap()}
     >
-      {/* Court */}
-      <mesh rotation-x={-Math.PI / 2} position={[0, 0, -1]} receiveShadow>
-        <planeGeometry args={[60, 60]} />
+      {/* background */}
+      <mesh position={[0, 0, -1]}>
+        <planeGeometry args={[40, 20]} />
         <meshStandardMaterial color={"#ffffff"} roughness={1} metalness={0} />
       </mesh>
 
-      {/* Hoop + backboard */}
-      <mesh position={[0, 3.3, -8.55]} castShadow receiveShadow>
-        <boxGeometry args={[2.2, 1.4, 0.08]} />
-        <meshStandardMaterial color={"#f7f7f7"} roughness={0.9} metalness={0.1} />
-      </mesh>
-      <mesh position={[0, 2.85, -8]} rotation-x={Math.PI / 2} castShadow>
-        <torusGeometry args={[0.48, 0.04, 18, 42]} />
-        <meshStandardMaterial color={"#111111"} roughness={0.3} metalness={0.6} />
+      {/* ground line */}
+      <mesh position={[0, worldBottom - 0.05, 0]}>
+        <planeGeometry args={[40, 0.12]} />
+        <meshStandardMaterial color={"#0b0b0b"} opacity={0.08} transparent />
       </mesh>
 
-      {/* Simple net hint */}
-      <mesh position={[0, 2.55, -8]} castShadow>
-        <coneGeometry args={[0.33, 0.55, 16, 1, true]} />
-        <meshStandardMaterial color={"#000000"} wireframe opacity={0.08} transparent />
+      {/* pipes */}
+      {pipes.current.map((_, i) => (
+        <group key={`pipe-${i}`}>
+          <mesh
+            ref={(el) => {
+              pipeTopRefs.current[i] = el;
+            }}
+            scale={[pipeWidth, 2, 1]}
+            material={pipeMat}
+          >
+            <boxGeometry args={[1, 1, 0.4]} />
+          </mesh>
+          <mesh
+            ref={(el) => {
+              pipeBottomRefs.current[i] = el;
+            }}
+            scale={[pipeWidth, 2, 1]}
+            material={pipeMat}
+          >
+            <boxGeometry args={[1, 1, 0.4]} />
+          </mesh>
+
+          {/* caps (subtle) */}
+          <mesh position={[0, 0, 0.24]} material={pipeCapMat} visible={false}>
+            <boxGeometry args={[1.18, 0.16, 0.2]} />
+          </mesh>
+        </group>
+      ))}
+
+      {/* player */}
+      <mesh ref={playerMesh} position={[playerX, 0, 0.4]}>
+        <planeGeometry args={[0.9, 0.9]} />
+        <meshBasicMaterial map={tex} transparent />
       </mesh>
 
-      {/* Player (minimal silhouette) */}
-      <group position={[0, 0.3, 5.8]}>
-        <mesh castShadow>
-          <capsuleGeometry args={[0.35, 1.0, 6, 12]} />
-          <meshStandardMaterial color={"#111111"} roughness={0.85} metalness={0.05} />
-        </mesh>
-        <mesh position={[0, 0.95, 0]} castShadow>
-          <sphereGeometry args={[0.22, 16, 16]} />
-          <meshStandardMaterial color={"#111111"} roughness={0.85} metalness={0.05} />
-        </mesh>
-      </group>
-
-      {/* Ball */}
-      <mesh ref={ballRef} position={ballStart.toArray()} castShadow>
-        <sphereGeometry args={[0.24, 24, 24]} />
-        <meshStandardMaterial color={"#1a1a1a"} roughness={0.35} metalness={0.15} />
-      </mesh>
-
-      {/* Aim line */}
-      <line ref={aimRef} visible={false}>
-        <bufferGeometry />
-        <lineBasicMaterial color={"#000000"} transparent opacity={0.25} />
-      </line>
-
-      {/* Soft fill light */}
-      <directionalLight position={[6, 10, 8]} intensity={0.8} castShadow />
-
-      {/* Instruction ghost text (3D) */}
-      <mesh position={[0, 0.01, 2]} rotation-x={-Math.PI / 2}>
-        <planeGeometry args={[8, 1.2]} />
-        <meshStandardMaterial transparent opacity={0} />
-      </mesh>
-
-      {/* Invisible interaction plane to catch pointer events */}
-      <mesh position={[0, 2.0, 2]} rotation-x={-Math.PI / 2}>
-        <planeGeometry args={[40, 40]} />
-        <meshBasicMaterial transparent opacity={0} />
-      </mesh>
-
-      {/* Hint state is used by the overlay in parent; kept here to avoid unused state lint */}
-      <group visible={false}>
-        <mesh userData={{ hint }} />
-      </group>
+      {/* light */}
+      <ambientLight intensity={1.0} />
+      <directionalLight position={[5, 8, 6]} intensity={0.7} />
     </group>
   );
 }
 
 export default function ThreeScene() {
   const [score, setScore] = useState(0);
+  const [best, setBest] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+
+  const start = () => {
+    setScore(0);
+    setGameOver(false);
+    setRunning(true);
+  };
 
   return (
     <div className="w-full h-full bg-white dark:bg-black relative">
@@ -282,17 +260,68 @@ export default function ThreeScene() {
         </div>
       </div>
 
-      <div className="absolute bottom-5 left-5 z-10 rounded-2xl border border-border/40 bg-background/70 backdrop-blur-md px-4 py-3">
+      <div className="absolute top-5 right-5 z-10 rounded-2xl border border-border/40 bg-background/70 backdrop-blur-md px-4 py-3">
         <div className="text-[11px] text-muted-foreground/70 font-normal">
-          Drag to aim · Release to shoot · Make = +3
+          Best
+        </div>
+        <div className="text-xl font-medium tracking-tight tabular-nums text-foreground/90">
+          {best}
         </div>
       </div>
 
-      <Canvas shadows>
-        <PerspectiveCamera makeDefault position={[0, 2.2, 10.5]} />
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.2} />
-        <BasketballGame onScore={(delta) => setScore((s) => s + delta)} />
+      <div className="absolute bottom-5 left-5 z-10 rounded-2xl border border-border/40 bg-background/70 backdrop-blur-md px-4 py-3">
+        <div className="text-[11px] text-muted-foreground/70 font-normal">
+          Click or Space to flap
+        </div>
+      </div>
+
+      {!running ? (
+        <button
+          type="button"
+          onClick={start}
+          className="absolute inset-0 z-10 flex items-center justify-center bg-transparent"
+          aria-label="Start game"
+        >
+          <div className="rounded-[2.5rem] border border-border/40 bg-background/75 backdrop-blur-md px-8 py-6 card-surface text-center space-y-2">
+            <div className="text-xl font-medium tracking-tight text-foreground/90">
+              Ali Flappy
+            </div>
+            <div className="text-sm text-muted-foreground/70 font-normal">
+              Click to start · Space to flap
+            </div>
+          </div>
+        </button>
+      ) : null}
+
+      {gameOver ? (
+        <button
+          type="button"
+          onClick={start}
+          className="absolute inset-0 z-10 flex items-center justify-center bg-transparent"
+          aria-label="Restart game"
+        >
+          <div className="rounded-[2.5rem] border border-border/40 bg-background/75 backdrop-blur-md px-8 py-6 card-surface text-center space-y-2">
+            <div className="text-xl font-medium tracking-tight text-foreground/90">
+              Game over
+            </div>
+            <div className="text-sm text-muted-foreground/70 font-normal">
+              Click to restart
+            </div>
+          </div>
+        </button>
+      ) : null}
+
+      <Canvas>
+        <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={70} />
+        <FlappyGame
+          running={running && !gameOver}
+          onScore={(delta) => setScore((s) => s + delta)}
+          onGameOver={() => {
+            setGameOver(true);
+            setRunning(false);
+            setBest((b) => Math.max(b, score));
+          }}
+        />
       </Canvas>
     </div>
   );
