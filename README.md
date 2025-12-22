@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ali Abassi — Personal Site
 
-## Getting Started
+High-end minimalist personal site built with **Next.js (App Router)** + **Tailwind CSS v4** + **shadcn/ui**.  
+Core positioning keyword: **AI Forward Deployed Engineer**.
 
-First, run the development server:
+## Stack
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4 (CSS-first `@import "tailwindcss"`)
+- **UI**: shadcn/ui, Radix primitives
+- **Typography**: Geist Sans + Geist Mono (via `next/font`)
+- **Charts**: Recharts (About “Professional Matrix”)
+- **3D**: React Three Fiber / Drei (Home hero)
+- **SEO**: Metadata, JSON-LD, sitemap, robots
+
+## Getting started
+Install deps and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
+```bash
+npm run dev      # start dev server
+npm run build    # production build
+npm run start    # run production server
+npm run lint     # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Site structure (routes)
+- **Home**: `/`
+- **Work**: `/work`
+- **Tools**: `/tools`
+- **About**: `/about`
+- **Content + Thoughts**: `/content`
+- **Thought detail**: `/thoughts/[slug]`
 
-## Learn More
+## Editing content
+### Thoughts (blog-style posts)
+Thoughts are defined in:
+- `src/data/thoughts.ts`
 
-To learn more about Next.js, take a look at the following resources:
+Each post includes:
+- `title`, `excerpt`, `date`, `image`
+- `content` (HTML string rendered into the post template)
+- `faqs` (minimum 5 per post)
+- `sources` (links rendered in the Sources section)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Work experience
+- `src/app/work/page.tsx` (role content + backlinks + logos under `public/logos/`)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design system
+Design rules live in:
+- `DESIGN_GUIDE.md`
 
-## Deploy on Vercel
+Quick rules:
+- **Sophisticated minimalism**: clean, breathable, premium
+- **No all-caps** for headings/labels
+- **Avoid heavy bold** (prefer `font-normal` / `font-medium`)
+- Keep tags colorful but subtle (soft backgrounds, low contrast)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## SEO
+Implemented SEO pieces:
+- Global metadata + JSON-LD: `src/app/layout.tsx`
+- Sitemap: `src/app/sitemap.ts`
+- Robots: `src/app/robots.ts`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+Recommended: **Vercel** (zero-maintenance hosting).
+
+Build command: `npm run build`  
+Output: Next.js default
