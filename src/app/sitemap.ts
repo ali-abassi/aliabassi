@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { thoughts } from "@/data/thoughts";
 import { workItems } from "@/data/work";
+import { tools } from "@/data/tools";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://aliabassi.com";
@@ -27,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...mainRoutes, ...thoughtRoutes, ...workDetailRoutes];
+  const toolRoutes = tools.map((t) => ({
+    url: `${baseUrl}/tools/${t.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...mainRoutes, ...thoughtRoutes, ...workDetailRoutes, ...toolRoutes];
 }
 
