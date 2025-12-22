@@ -1,93 +1,221 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Metadata } from "next";
-import { Box, Code, Sparkles, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Tools & Experiments",
-  description: "A collection of mini-projects and technical experiments by Ali Abassi.",
+  title: "Tools",
+  description:
+    "Free tools, brand builds, and pay-as-you-use utilities by Ali Abassi — AI Forward Deployed Engineer.",
 };
 
-const toolTags: Record<string, string> = {
-  "3D": "bg-purple-50/50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
-  "AI": "bg-blue-50/50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
-  "React": "bg-cyan-50/50 text-cyan-600 dark:bg-cyan-900/20 dark:text-cyan-400",
-  "Next.js": "bg-zinc-50/50 text-zinc-600 dark:bg-zinc-800/20 dark:text-zinc-300",
-  "Prompts": "bg-orange-50/50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400",
-  "Automation": "bg-green-50/50 text-green-600 dark:bg-green-900/20 dark:text-green-400",
-  "Utilities": "bg-indigo-50/50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400",
+const tagStyles: Record<string, string> = {
+  AI: "bg-blue-50/60 text-blue-700/80 dark:bg-blue-500/10 dark:text-blue-300/80",
+  "Design Systems":
+    "bg-purple-50/60 text-purple-700/80 dark:bg-purple-500/10 dark:text-purple-300/80",
+  "Voice/Agents":
+    "bg-green-50/60 text-green-700/80 dark:bg-green-500/10 dark:text-green-300/80",
+  "SEO/Growth":
+    "bg-orange-50/60 text-orange-700/80 dark:bg-orange-500/10 dark:text-orange-300/80",
+  "Utilities":
+    "bg-slate-50/60 text-slate-700/80 dark:bg-slate-500/10 dark:text-slate-300/80",
+  "3D":
+    "bg-pink-50/60 text-pink-700/80 dark:bg-pink-500/10 dark:text-pink-300/80",
 };
 
-const tools = [
+type ToolCard = {
+  title: string;
+  description: string;
+  tags: (keyof typeof tagStyles)[];
+  href: string;
+  cta: string;
+  external?: boolean;
+};
+
+const freeTools: ToolCard[] = [
   {
-    title: "3D Playground",
-    description: "Interactive 3D environments exploring React Three Fiber and Three.js.",
-    icon: Box,
-    status: "Active",
-    tags: ["3D", "React", "Next.js"],
-    link: "#",
+    title: "Prompt QA Checklist",
+    description:
+      "A quick rubric for validating prompts and agent behaviors before shipping.",
+    tags: ["AI", "Utilities"],
+    href: "/tools",
+    cta: "Open",
   },
   {
-    title: "AI Workflows",
-    description: "A collection of custom LLM prompts and automated business workflows.",
-    icon: Sparkles,
-    status: "Beta",
-    tags: ["AI", "Prompts", "Automation"],
-    link: "#",
+    title: "Onboarding Message Generator",
+    description:
+      "Generate clean, non-cringey onboarding messages for product + sales flows.",
+    tags: ["SEO/Growth", "Utilities"],
+    href: "/tools",
+    cta: "Open",
   },
   {
-    title: "Code Snippets",
-    description: "Useful technical components and utility functions for Next.js projects.",
-    icon: Code,
-    status: "Ongoing",
-    tags: ["React", "Utilities"],
-    link: "#",
+    title: "System Prompt Templates",
+    description:
+      "A small set of battle-tested templates for tool calling, policies, and tone.",
+    tags: ["AI", "Design Systems"],
+    href: "/tools",
+    cta: "Open",
   },
 ];
 
-export default function ToolsPage() {
+const brands: ToolCard[] = [
+  {
+    title: "AI for Work",
+    description:
+      "Built and exited. SEO-first distribution and a workflow-based prompt product.",
+    tags: ["AI", "SEO/Growth"],
+    href: "/work/ai-for-work",
+    cta: "View case study",
+  },
+  {
+    title: "AliAbassi.com",
+    description:
+      "This site: minimal design, technical SEO, and an editorial Thoughts system.",
+    tags: ["Design Systems", "SEO/Growth"],
+    href: "/",
+    cta: "Visit",
+  },
+];
+
+const payAsYouUseTools: ToolCard[] = [
+  {
+    title: "Voice Agent Starter Pack",
+    description:
+      "Pay-per-deployment implementation of a voice agent with QA + launch support.",
+    tags: ["Voice/Agents", "AI"],
+    href: "/content",
+    cta: "Learn more",
+  },
+  {
+    title: "Forward Deployed Audit",
+    description:
+      "A scoped, pay-as-you-use review of your agent architecture and failure modes.",
+    tags: ["AI", "Utilities"],
+    href: "/content",
+    cta: "Learn more",
+  },
+];
+
+function Section({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
   return (
-    <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-20">
-      <div className="space-y-6 text-center max-w-3xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tightest">Tools</h1>
-        <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
-          Technical prototypes, mini-projects, and experiments in the AI/3D space.
+    <section className="space-y-10">
+      <div className="space-y-3 text-center max-w-3xl mx-auto">
+        <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-foreground/90">
+          {title}
+        </h2>
+        <p className="text-lg md:text-xl text-muted-foreground font-normal leading-relaxed">
+          {description}
         </p>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {tools.map((tool) => (
-          <Card key={tool.title} className="group overflow-hidden border-border/50 hover:border-foreground/30 transition-all duration-500 rounded-[2.5rem] shadow-none bg-muted/[0.02] flex flex-col h-full">
-            <CardHeader className="p-10 pb-4">
-              <div className="w-14 h-14 rounded-2xl bg-background border border-border/50 flex items-center justify-center mb-8 group-hover:bg-foreground group-hover:text-background transition-all duration-500 shadow-sm">
-                <tool.icon className="w-7 h-7 opacity-60 group-hover:opacity-100" />
-              </div>
-              <CardTitle className="text-2xl font-semibold tracking-tight mb-4">{tool.title}</CardTitle>
-              <div className="flex flex-wrap gap-2">
-                {tool.tags.map(tag => (
-                  <Badge 
-                    key={tag} 
-                    className={`rounded-md font-medium text-[11px] px-2.5 py-0.5 border-none shadow-none ${toolTags[tag] || 'bg-muted text-muted-foreground'}`}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardHeader>
-            <CardContent className="p-10 pt-4 space-y-8 flex flex-col justify-between flex-1">
-              <p className="text-lg text-muted-foreground/80 font-normal leading-relaxed">{tool.description}</p>
-              <div className="flex items-center justify-between pt-6 border-t border-border/30">
-                <span className="text-[10px] font-medium tracking-widest text-muted-foreground/50 font-mono">
-                  {tool.status}
-                </span>
-                <a href={tool.link} className="flex items-center gap-2 text-sm font-semibold hover:underline group/link">
-                  Coming soon <ExternalLink className="w-4 h-4 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                </a>
-              </div>
-            </CardContent>
-          </Card>
+      {children}
+    </section>
+  );
+}
+
+function ToolCardItem({ item }: { item: ToolCard }) {
+  const inner = (
+    <div className="rounded-[2.5rem] border border-border/40 bg-muted/[0.01] hover:bg-muted/[0.03] hover:border-border/60 transition-all duration-500 p-8 md:p-10 space-y-8">
+      <div className="space-y-3">
+        <div className="text-2xl md:text-3xl font-medium tracking-tight text-foreground/90">
+          {item.title}
+        </div>
+        <p className="text-lg text-muted-foreground/80 font-normal leading-relaxed">
+          {item.description}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {item.tags.map((tag) => (
+          <Badge
+            key={tag}
+            className={`rounded-md text-[11px] px-2.5 py-0.5 border-none shadow-none font-normal ${
+              tagStyles[tag] ?? "bg-muted text-muted-foreground"
+            }`}
+          >
+            {tag}
+          </Badge>
         ))}
       </div>
+
+      <div className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground/70 group-hover:text-foreground transition-colors">
+        {item.cta} <ExternalLink className="w-4 h-4 opacity-35" />
+      </div>
+    </div>
+  );
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block no-underline"
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={item.href} className="group block no-underline">
+      {inner}
+    </Link>
+  );
+}
+
+export default function ToolsPage() {
+  return (
+    <main className="max-w-7xl mx-auto px-6 py-24 md:py-32 space-y-24">
+      <header className="space-y-6 text-center max-w-3xl mx-auto">
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tightest">
+          Tools
+        </h1>
+        <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
+          A small set of utilities and builds—organized by pricing model and intent.
+        </p>
+      </header>
+
+      <Section
+        title="Free tools"
+        description="Small utilities you can use immediately. Built to be fast, simple, and low-maintenance."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {freeTools.map((t) => (
+            <ToolCardItem key={t.title} item={t} />
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        title="Brands"
+        description="Larger builds and product work. These are the things I’ve shipped with real distribution and outcomes."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {brands.map((t) => (
+            <ToolCardItem key={t.title} item={t} />
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        title="Pay as you use tools"
+        description="Scoped tools and implementations where pricing maps cleanly to usage or outcomes."
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {payAsYouUseTools.map((t) => (
+            <ToolCardItem key={t.title} item={t} />
+          ))}
+        </div>
+      </Section>
     </main>
   );
 }
