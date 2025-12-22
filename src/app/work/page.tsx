@@ -12,9 +12,13 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams?: {
-    view?: "employee" | "builder" | string;
-  };
+  searchParams?:
+    | {
+        view?: string | string[];
+      }
+    | Promise<{
+        view?: string | string[];
+      }>;
 };
 
 function TabLink({
@@ -141,8 +145,11 @@ function WorkCard({
   );
 }
 
-export default function WorkPage({ searchParams }: Props) {
-  const view = searchParams?.view === "builder" ? "builder" : "employee";
+export default async function WorkPage({ searchParams }: Props) {
+  const sp = (await searchParams) ?? {};
+  const rawView = sp.view;
+  const viewParam = Array.isArray(rawView) ? rawView[0] : rawView;
+  const view = viewParam === "builder" ? "builder" : "employee";
   const items = view === "builder" ? builderItems : employeeItems;
 
   return (
