@@ -9,17 +9,17 @@ import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "About Me",
-  description: "Learn more about Ali Abassi, Senior AI Implementation Engineer. Explore FAQs, media mentions, and career background.",
+  description: "Learn more about Ali Abassi, AI / Forward Deployed Engineer. Explore FAQs, media mentions, and career background.",
 };
 
 const faqs = [
   {
     question: "Who is Ali Abassi?",
-    answer: "Ali Abassi is a Senior AI Implementation Engineer at Lindy AI, specializing in building production-grade AI agents and human-centric interfaces. He has a track record of founding and scaling AI-driven platforms like AI for Work.",
+    answer: "Ali Abassi is an AI / Forward Deployed Engineer at Lindy AI, specializing in building production-grade AI agents and human-centric interfaces. He has a track record of founding and scaling AI-driven platforms like AI for Work.",
   },
   {
     question: "What is Ali Abassi's expertise?",
-    answer: "Ali specializes in Prompt Engineering, LLM Infrastructure, and UI/UX design for AI applications. He bridges the gap between complex technical architectures and intuitive user experiences, with a focus on zero-hallucination conversational agents.",
+    answer: "Ali specializes in Forward Deployed Engineering, Prompt Engineering, LLM Infrastructure, and UI/UX design for AI applications. He bridges the gap between complex technical architectures and intuitive user experiences, with a focus on zero-hallucination conversational agents.",
   },
   {
     question: "What companies has Ali Abassi worked for?",
@@ -48,13 +48,13 @@ export default function AboutPage() {
         
         <div className="prose prose-zinc dark:prose-invert max-w-4xl space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-medium">
           <p>
-            I'm <span className="text-foreground font-bold">Ali Abassi</span>, a design-driven engineer focused on the intersection of AI, technical engineering, and user interfaces.
+            I'm <span className="text-foreground font-bold">Ali Abassi</span>, a design-driven <span className="text-foreground">AI / Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
           </p>
           <p>
-            With a background spanning <span className="text-foreground">growth marketing</span> and <span className="text-foreground">implementation engineering</span>, I believe that the best products are built with a deep understanding of both human psychology and technical architecture.
+            With a background spanning <span className="text-foreground">growth marketing</span> and <span className="text-foreground">technical implementation</span>, I believe that the best products are built with a deep understanding of both human psychology and technical architecture.
           </p>
           <p>
-            Currently, I'm a <span className="text-foreground">Senior AI Implementation Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
+            Currently, I'm an <span className="text-foreground">AI / Forward Deployed Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
           </p>
         </div>
       </div>

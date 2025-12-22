@@ -1,35 +1,31 @@
 # Ali Abassi - Design Guide
 
 ## Philosophy
-Super simple, high-contrast, black and white aesthetic. Focus on typography, whitespace, and subtle animations. No unnecessary colors.
+High-End Minimalist. Focus on sophisticated typography, generous whitespace, and subtle, intentional animations. Avoid harsh brutalism in favor of refined elegance.
 
 ## Color Palette
 - **Background**: #FFFFFF (White) / #000000 (Black)
 - **Foreground**: #000000 (Black) / #FFFFFF (White)
 - **Muted**: #737373 (Neutral 500)
-- **Border**: #E5E5E5 (Neutral 200) / #262626 (Neutral 800)
-- **Accent**: No colors. Use bold weights or inverted blocks for emphasis.
+- **Border**: #F2F2F2 (Light) / #1A1A1A (Dark)
+- **Accent**: Low-saturation pastel tags for categorization (soft blues, purples, greens).
 
 ## Typography
-- **Headings**: Geist Sans (Sans-serif), Bold/Extrabold, tight tracking. Mixed case (not all caps).
-- **Body**: Geist Sans, Regular, leading-relaxed.
-- **Monospace**: Geist Mono for technical details, tools, and code.
-
-### Enforced in code
-We enforce defaults for semantic HTML tags via `@layer base` in `src/app/globals.css`:
-- `h1/h2/h3` get consistent sizing/weight/tracking
-- `p` gets consistent type size and line-height
-- `a` gets consistent underline style
-
-Use semantic tags first; only add utility classes when you intentionally want to break the standard.
+- **Headings**: Geist Sans (Sans-serif), Bold/Extrabold, tight tracking. Mixed case (Standard capitalization).
+- **Body**: Geist Sans, Medium/Normal weight, leading-relaxed.
+- **Monospace**: Geist Mono for technical components.
 
 ## Layout
-- **Container**: Max-width 7xl (1280px), centered with padding.
-- **Spacing**: Generous whitespace. Use multiples of 4 (Tailwind defaults).
-- **Transitions**: Simple fade-ins or subtle transforms (Framer Motion).
+- **Container**: Max-width 6xl (1152px) for readability.
+- **Radius**: Standard 0.5rem (8px) or larger (2rem+) for cards to soften the look.
+- **Spacing**: Generous breathing room between sections.
 
 ## Components
-- **Buttons**: Square or slightly rounded (md). Solid black with white text or outline.
-- **Cards**: Minimalist. Simple border or very subtle shadow.
-- **Navigation**: Clean text links with underline on hover.
+- **Navbar**: Pill-style floating header with backdrop-blur.
+- **Buttons**: Rounded-full, high-contrast.
+- **Tags**: Rounded-md, soft background colors, mixed-case text.
+- **Cards**: Large radius, subtle borders, no heavy shadows.
 
+## Keyword Strategy
+- **Core Focus**: AI / Forward Deployed Engineer
+- **Supporting**: Senior AI Implementation Engineer

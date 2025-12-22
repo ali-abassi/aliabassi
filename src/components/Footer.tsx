@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
           <div className="md:col-span-6 space-y-10">
             <Link href="/" className="text-4xl font-bold tracking-tight">
-              AliAbassi
+              Ali Abassi
             </Link>
             <p className="max-w-md text-xl md:text-2xl text-muted-foreground font-medium leading-relaxed">
               Engineering the future of AI interfaces through design-driven implementation.

@@ -15,10 +15,10 @@ export default function Home() {
           <div className="flex-1 space-y-10">
             <div className="space-y-6">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.9]">
-                AliAbassi
+                Ali Abassi
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
-                Senior AI Implementation Engineer. Building production-grade AI interfaces and scalable LLM infrastructure.
+                AI / Forward Deployed Engineer. Building production-grade AI interfaces and scalable LLM infrastructure.
               </p>
             </div>
             

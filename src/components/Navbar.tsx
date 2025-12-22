@@ -40,7 +40,7 @@ export function Navbar() {
             href="/"
             className="text-xl font-bold tracking-tight hover:opacity-70 transition-opacity"
           >
-            AliAbassi
+            Ali Abassi
           </Link>
 
           <nav className="hidden md:flex items-center gap-2">

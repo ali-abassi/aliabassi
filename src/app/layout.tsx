@@ -20,11 +20,11 @@ const baseUrl = "https://aliabassi.com";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Ali Abassi | Senior AI Implementation Engineer",
+    default: "Ali Abassi | AI / Forward Deployed Engineer",
     template: "%s | Ali Abassi",
   },
-  description: "Personal website of Ali Abassi - Design-driven Senior AI Implementation Engineer specialized in AI, LLMs, and UI Engineering.",
-  keywords: ["Ali Abassi", "AI Engineer", "Implementation Engineer", "LLM", "Next.js", "React", "Design", "UI Engineering"],
+  description: "Personal website of Ali Abassi - Design-driven AI / Forward Deployed Engineer specialized in AI implementation, LLMs, and UI Engineering.",
+  keywords: ["Ali Abassi", "Forward Deployed Engineer", "AI Engineer", "Implementation Engineer", "LLM", "Next.js", "React", "Design", "UI Engineering"],
   authors: [{ name: "Ali Abassi" }],
   creator: "Ali Abassi",
   openGraph: {
@@ -82,13 +82,13 @@ export default function RootLayout({
     "@type": "Person",
     "name": "Ali Abassi",
     "url": baseUrl,
-    "jobTitle": "Senior AI Implementation Engineer",
+    "jobTitle": "AI / Forward Deployed Engineer",
     "sameAs": [
       "https://twitter.com/aliabassi",
       "https://github.com/aliabassi",
       "https://linkedin.com/in/aliabassi1/"
     ],
-    "description": "Senior AI Implementation Engineer specialized in AI, LLMs, and UI Engineering."
+    "description": "AI / Forward Deployed Engineer specialized in AI, LLMs, and UI Engineering."
   };
 
   return (
