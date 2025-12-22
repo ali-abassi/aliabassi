@@ -49,7 +49,7 @@ export default function ToolsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-20">
       <div className="space-y-6 text-center max-w-3xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">Tools</h1>
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tightest">Tools</h1>
         <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">
           Technical prototypes, mini-projects, and experiments in the AI/3D space.
         </p>

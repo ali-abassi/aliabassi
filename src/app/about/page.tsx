@@ -163,7 +163,7 @@ export default function AboutPage() {
       {/* Intro Section */}
       <div className="space-y-16">
         <div className="space-y-6 text-center max-w-3xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-semibold tracking-tightest leading-none">
+          <h1 className="text-5xl md:text-7xl font-semibold tracking-tightest">
             About
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground font-normal leading-relaxed">

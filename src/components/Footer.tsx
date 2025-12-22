@@ -44,7 +44,7 @@ export function Footer() {
           <div className="md:col-span-3 space-y-8">
             <h4 className="text-sm font-medium text-muted-foreground/70">Latest</h4>
             <ul className="space-y-5 text-base">
-              <li><Link href="/content" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Content <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
+              <li><Link href="/content" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Thoughts <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></Link></li>
               <li><a href="/sitemap.xml" className="group flex items-center gap-2 hover:text-foreground transition-colors no-underline text-muted-foreground font-normal">Sitemap <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all" /></a ></li>
             </ul>
           </div>
