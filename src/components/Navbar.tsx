@@ -38,7 +38,7 @@ export function Navbar() {
         )}>
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight hover:opacity-70 transition-opacity"
+            className="text-xl font-medium tracking-tight hover:opacity-70 transition-opacity"
           >
             Ali Abassi
           </Link>
@@ -95,7 +95,7 @@ export function Navbar() {
           <Link
             href="/"
             onClick={() => setOpen(false)}
-            className="text-2xl font-bold tracking-tight"
+            className="text-2xl font-medium tracking-tight"
           >
             Home
           </Link>
@@ -105,8 +105,8 @@ export function Navbar() {
               href={item.path}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-4xl font-bold tracking-tight",
-                pathname === item.path ? "text-foreground underline decoration-4 underline-offset-8" : "text-muted-foreground"
+                "text-4xl font-medium tracking-tight",
+                pathname === item.path ? "text-foreground underline decoration-2 underline-offset-8" : "text-muted-foreground"
               )}
             >
               {item.name}

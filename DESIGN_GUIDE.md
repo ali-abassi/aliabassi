@@ -27,5 +27,5 @@ High-End Minimalist. Sophisticated typography, generous whitespace, and subtle, 
 ## Components
 - **Navbar**: Pill-style header with floating blur effect.
 - **Buttons**: Rounded-full, high-contrast, premium shadows.
-- **Tags**: Rounded-md, soft background colors, mixed-case text. No all-caps.
+- **Tags**: Rounded-md, soft background colors, mixed-case text. No all-caps, no bold text.
 - **Article**: High-contrast prose, custom blockquotes, and integrated FAQ/Sources sections.

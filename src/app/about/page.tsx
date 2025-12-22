@@ -100,7 +100,7 @@ const faqs = [
 ];
 
 const personalityData = [
-  { trait: "Technical Depth", value: 95 },
+  { trait: "Technical", value: 95 },
   { trait: "Design", value: 90 },
   { trait: "Growth", value: 85 },
   { trait: "Strategy", value: 92 },
@@ -110,19 +110,19 @@ const personalityData = [
 
 const chartConfig = {
   value: {
-    label: "Trait Level",
+    label: "Level",
     color: "hsl(var(--foreground))",
   },
 } satisfies ChartConfig;
 
-const interests = [
+const likes = [
   { 
     title: "Steph Curry", 
     image: "https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?q=80&w=1000&auto=format&fit=crop",
     className: "md:col-span-2 md:row-span-2" 
   },
   { 
-    title: "Stock Market", 
+    title: "Markets", 
     image: "https://images.unsplash.com/photo-1611974714024-4607a5a48191?q=80&w=1000&auto=format&fit=crop",
     className: "md:col-span-1 md:row-span-1" 
   },
@@ -132,7 +132,12 @@ const interests = [
     className: "md:col-span-1 md:row-span-2" 
   },
   { 
-    title: "Building Products", 
+    title: "Minimalism", 
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
+    className: "md:col-span-1 md:row-span-1" 
+  },
+  { 
+    title: "Product Lab", 
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop",
     className: "md:col-span-2 md:row-span-1" 
   },
@@ -144,49 +149,49 @@ const interests = [
 ];
 
 const tags = [
-  { name: "Snowboarding", color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400" },
-  { name: "Outdoors", color: "bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400" },
-  { name: "Building Products", color: "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400" },
-  { name: "Business Strategy", color: "bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400" },
-  { name: "Coding", color: "bg-cyan-50 text-cyan-600 dark:bg-cyan-900/20 dark:text-cyan-400" },
-  { name: "Stocks", color: "bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400" },
+  { name: "Snowboarding", color: "bg-blue-50/50 text-blue-600/80 dark:bg-blue-900/10 dark:text-blue-400/80" },
+  { name: "Outdoors", color: "bg-green-50/50 text-green-600/80 dark:bg-green-900/10 dark:text-green-400/80" },
+  { name: "Building Products", color: "bg-purple-50/50 text-purple-600/80 dark:bg-purple-900/10 dark:text-purple-400/80" },
+  { name: "Strategy", color: "bg-orange-50/50 text-orange-600/80 dark:bg-orange-900/10 dark:text-orange-400/80" },
+  { name: "Coding", color: "bg-cyan-50/50 text-cyan-600/80 dark:bg-cyan-900/10 dark:text-cyan-400/80" },
+  { name: "Markets", color: "bg-yellow-50/50 text-yellow-600/80 dark:bg-yellow-900/10 dark:text-yellow-400/80" },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="max-w-5xl mx-auto px-6 py-24 md:py-32 space-y-32">
+    <main className="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-32">
       {/* Intro Section */}
-      <div className="space-y-12">
-        <h1 className="text-6xl md:text-8xl font-bold tracking-tightest leading-none">About</h1>
+      <div className="space-y-16">
+        <h1 className="text-6xl md:text-8xl font-semibold tracking-tightest leading-none">About</h1>
         
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16 items-start">
-          <div className="prose prose-zinc dark:prose-invert max-w-none space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-medium">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-16 lg:gap-24 items-center">
+          <div className="prose prose-zinc dark:prose-invert max-w-none space-y-8 text-xl md:text-2xl leading-relaxed text-muted-foreground font-normal">
             <p>
-              I'm <span className="text-foreground font-bold">Ali Abassi</span>, a design-driven <span className="text-foreground">AI Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
+              I'm <span className="text-foreground font-medium">Ali Abassi</span>, a design-driven <span className="text-foreground">AI Forward Deployed Engineer</span> focused on the intersection of AI, technical engineering, and user interfaces.
             </p>
             <p>
-              With a background spanning <span className="text-foreground">growth marketing</span> and <span className="text-foreground">technical implementation</span>, I believe that the best products are built with a deep understanding of both human psychology and technical architecture.
+              With a background spanning <span className="text-foreground font-medium">growth marketing</span> and <span className="text-foreground font-medium">technical implementation</span>, I believe that the best products are built with a deep understanding of both human psychology and technical architecture.
             </p>
             <p>
-              Currently, I'm an <span className="text-foreground">AI Forward Deployed Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
+              Currently, I'm an <span className="text-foreground font-medium">AI Forward Deployed Engineer at Lindy AI</span>, where I work on building production-grade AI agents that actually solve complex business workflows.
             </p>
           </div>
 
           {/* Personality Graph */}
-          <div className="space-y-6">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-center">Personality Matrix</h3>
+          <div className="space-y-8 p-8 border border-border/50 rounded-[2rem] bg-muted/5">
+            <h3 className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground/60 text-center font-mono">Professional Matrix</h3>
             <div className="aspect-square w-full">
               <ChartContainer config={chartConfig} className="h-full w-full">
-                <RadarChart data={personalityData}>
+                <RadarChart data={personalityData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                   <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-                  <PolarAngleAxis dataKey="trait" tick={{ fontSize: 10, fontWeight: 600 }} />
-                  <PolarGrid />
+                  <PolarAngleAxis dataKey="trait" tick={{ fontSize: 9, fontWeight: 400, fill: "currentColor", opacity: 0.4 }} />
+                  <PolarGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} />
                   <Radar
                     dataKey="value"
                     fill="var(--foreground)"
-                    fillOpacity={0.1}
+                    fillOpacity={0.03}
                     stroke="var(--foreground)"
-                    strokeWidth={2}
+                    strokeWidth={1}
                   />
                 </RadarChart>
               </ChartContainer>
@@ -195,36 +200,36 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Visual Canvas (Hobbies & Interests) */}
+      {/* Full Visual Canvas */}
       <section className="space-y-12">
-        <div className="space-y-4">
-          <h2 className="text-4xl font-bold tracking-tight">Visual Canvas</h2>
-          <p className="text-xl text-muted-foreground font-medium">A glimpse into the things that inspire me and keep me moving.</p>
+        <div className="space-y-4 max-w-3xl">
+          <h2 className="text-4xl font-medium tracking-tight">Things I Like</h2>
+          <p className="text-xl text-muted-foreground font-normal">A visual collection of interests, inspirations, and daily drivers.</p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
-          {interests.map((interest) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/30 border border-border/30 overflow-hidden rounded-[2.5rem]">
+          {likes.map((item) => (
             <div 
-              key={interest.title} 
-              className={`relative overflow-hidden rounded-[2rem] group border border-border/50 ${interest.className}`}
+              key={item.title} 
+              className={`relative overflow-hidden group bg-background ${item.className}`}
             >
               <img 
-                src={interest.image} 
-                alt={interest.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                src={item.image} 
+                alt={item.title}
+                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                <p className="text-white font-bold text-lg">{interest.title}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                <p className="text-white font-medium text-[10px] uppercase tracking-[0.2em]">{item.title}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-2 pt-8">
+        <div className="flex flex-wrap gap-2 pt-4">
           {tags.map((tag) => (
             <Badge 
               key={tag.name} 
-              className={`rounded-md font-medium text-sm px-3.5 py-1 border-none shadow-none ${tag.color}`}
+              className={`rounded-md font-medium text-[12px] px-3 py-0.5 border-none shadow-none ${tag.color}`}
             >
               {tag.name}
             </Badge>
@@ -235,17 +240,17 @@ export default function AboutPage() {
       {/* FAQ Section */}
       <section className="space-y-16 border-t border-border/50 pt-32">
         <div className="space-y-6 max-w-3xl">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tightest">Expertise FAQ</h2>
-          <p className="text-xl text-muted-foreground font-medium leading-relaxed">Everything you need to know about AI implementation and forward deployed engineering.</p>
+          <h2 className="text-5xl md:text-6xl font-medium tracking-tightest">Expertise FAQ</h2>
+          <p className="text-xl text-muted-foreground font-normal leading-relaxed">Technical deep-dives into AI implementation and forward deployed engineering.</p>
         </div>
         
         <Accordion type="single" collapsible className="w-full max-w-4xl">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border-b border-border/30 py-4">
-              <AccordionTrigger className="text-left font-bold text-xl md:text-2xl hover:no-underline group py-6">
+            <AccordionItem key={i} value={`item-${i}`} className="border-b border-border/20 py-4">
+              <AccordionTrigger className="text-left font-medium text-lg md:text-xl hover:no-underline group py-6">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-lg md:text-xl font-normal leading-relaxed pb-8 pt-2">
+              <AccordionContent className="text-muted-foreground text-base md:text-lg font-normal leading-relaxed pb-8 pt-2">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
@@ -255,27 +260,32 @@ export default function AboutPage() {
 
       {/* Media Section */}
       <section className="space-y-12 border-t border-border/50 pt-32">
-        <h2 className="text-4xl font-bold tracking-tight">In the Media</h2>
+        <h2 className="text-4xl font-medium tracking-tight">In the Media</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-8 border border-border/50 rounded-[2rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
-            <div className="absolute top-6 right-8 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest">Article</div>
-            <h3 className="text-2xl font-bold mt-1">Acquisition of AI for Work</h3>
+          <div className="p-10 border border-border/50 rounded-[2.5rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
+            <div className="absolute top-8 right-10 text-[10px] font-medium text-muted-foreground/40 uppercase tracking-widest font-mono">Article</div>
+            <h3 className="text-2xl font-medium mt-1">Acquisition of AI for Work</h3>
             <p className="text-lg mt-4 text-muted-foreground font-normal leading-relaxed">Detailing the growth and eventual exit of the world's largest prompt library.</p>
           </div>
-          <div className="p-8 border border-border/50 rounded-[2rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
-            <div className="absolute top-6 right-8 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest">Podcast</div>
-            <h3 className="text-2xl font-bold mt-1">The Future of AI Agents</h3>
+          <div className="p-10 border border-border/50 rounded-[2.5rem] bg-muted/5 group hover:border-foreground transition-all relative overflow-hidden">
+            <div className="absolute top-8 right-10 text-[10px] font-medium text-muted-foreground/40 uppercase tracking-widest font-mono">Podcast</div>
+            <h3 className="text-2xl font-medium mt-1">The Future of AI Agents</h3>
             <p className="text-lg mt-4 text-muted-foreground font-normal leading-relaxed">Discussing the shift from chat-interfaces to fully autonomous agents.</p>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="space-y-8 border-t border-border/50 pt-32 text-center md:text-left">
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Connect</h2>
-        <div className="space-y-6">
-          <p className="text-xl text-muted-foreground font-medium">Based in Vancouver, Canada. Open for high-impact AI implementation partnerships.</p>
-          <a href="mailto:hello@aliabassi.com" className="text-2xl md:text-4xl font-bold text-foreground hover:text-foreground/70 transition-all border-b-2 border-foreground inline-block pb-2">
+      <section className="space-y-10 border-t border-border/50 pt-32 text-center md:text-left">
+        <h2 className="text-4xl font-medium tracking-tight">Connect</h2>
+        <div className="space-y-8">
+          <p className="text-xl md:text-2xl text-muted-foreground font-normal max-w-2xl leading-relaxed">
+            Based in Vancouver, Canada. Open for high-impact AI implementation partnerships.
+          </p>
+          <a 
+            href="mailto:hello@aliabassi.com" 
+            className="text-2xl md:text-5xl font-medium text-foreground hover:text-foreground/60 transition-all border-b border-foreground/20 inline-block pb-4 no-underline tracking-tight"
+          >
             hello@aliabassi.com
           </a>
         </div>
